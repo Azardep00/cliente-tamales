@@ -1,9 +1,15 @@
 .cabecera { background: var(--verde-hoja); padding-block: 16px; }
-.cabecera-inner { display: flex; align-items: center; justify-content: space-between; }
+.cabecera-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
 
 .marca { display: flex; flex-direction: column; color: var(--crema-masa); }
 .marca-nombre { font-family: var(--fuente-titulo); font-size: 1.3rem; font-weight: 700; }
 .marca-lugar { font-size: 0.78rem; color: var(--oro-maiz); }
+
+.nav-derecha { display: flex; align-items: center; gap: 16px; }
+.enlace { color: var(--crema-masa); font-weight: 600; font-size: 0.9rem; background: none; border: none; }
+.enlace:hover { color: var(--oro-maiz); }
+.enlace-boton { padding: 0; }
+.saludo { color: var(--oro-maiz); font-size: 0.85rem; }
 
 .enlace-carrito {
   position: relative; color: var(--crema-masa); font-weight: 600;
