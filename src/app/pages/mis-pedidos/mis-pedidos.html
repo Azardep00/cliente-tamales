@@ -1,0 +1,47 @@
+<section class="contenedor mis-pedidos">
+  <h1>Mis pedidos</h1>
+
+  @if (cargando()) {
+    <p>Cargando pedidos...</p>
+  } @else if (error()) {
+    <p class="mensaje-error">{{ error() }}</p>
+  } @else if (pedidos().length === 0) {
+    <div class="estado-vacio">
+      <h3>Todavía no has hecho ningún pedido</h3>
+      <a routerLink="/catalogo" class="boton boton-primario">Ver catálogo</a>
+    </div>
+  } @else {
+    <div class="lista-pedidos">
+      @for (pedido of pedidos(); track pedido.idPedido) {
+        <div class="tarjeta pedido">
+          <div class="pedido-encabezado">
+            <div>
+              <strong>Pedido #{{ pedido.idPedido }}</strong>
+              <p class="pedido-fecha">{{ formatearFecha(pedido.fecha) }}</p>
+            </div>
+            <span class="insignia insignia-{{ pedido.estado.toLowerCase() }}">{{ pedido.estado }}</span>
+          </div>
+
+          <div class="pedido-detalles">
+            @for (d of pedido.detalles; track d.idDetallePedido) {
+              <div class="linea">
+                <span>{{ d.cantidad }} × {{ d.producto.nombre }}</span>
+                <span>{{ formatearPrecio(d.subtotal) }}</span>
+              </div>
+            }
+          </div>
+
+          <div class="pedido-pie">
+            <span class="pedido-total">Total: {{ formatearPrecio(pedido.total) }}</span>
+            @if (puedeCancelar(pedido)) {
+              <button type="button" class="boton-peligro-texto" [disabled]="cancelandoId() === pedido.idPedido"
+                      (click)="cancelar(pedido.idPedido)">
+                {{ cancelandoId() === pedido.idPedido ? 'Cancelando...' : 'Cancelar pedido' }}
+              </button>
+            }
+          </div>
+        </div>
+      }
+    </div>
+  }
+</section>

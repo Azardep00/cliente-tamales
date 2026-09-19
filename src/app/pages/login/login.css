@@ -1,0 +1,7 @@
+.pagina-auth { padding-block: 60px; display: flex; justify-content: center; }
+.caja-auth { padding: 32px; width: 100%; max-width: 380px; }
+.caja-auth h1 { font-size: 1.5rem; }
+.subtitulo { color: var(--tinta-suave); font-size: 0.9rem; margin-top: 6px; margin-bottom: 22px; }
+.mensaje-general { margin-bottom: 14px; }
+.pie-auth { text-align: center; margin-top: 18px; font-size: 0.88rem; color: var(--tinta-suave); }
+.pie-auth a { color: var(--achiote); font-weight: 600; }

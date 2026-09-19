@@ -1,0 +1,10 @@
+.checkout { padding-block: 32px 60px; max-width: 560px; margin-inline: auto; }
+.checkout h1 { margin-bottom: 20px; }
+
+.resumen-checkout, .datos-entrega { padding: 20px; margin-bottom: 16px; }
+.resumen-checkout h3, .datos-entrega h3 { font-size: 1rem; margin-bottom: 12px; }
+
+.linea { display: flex; justify-content: space-between; padding-block: 6px; font-size: 0.92rem; }
+.linea-total { border-top: 1px solid var(--crema-borde); margin-top: 8px; padding-top: 12px; font-weight: 700; font-size: 1.05rem; color: var(--achiote); }
+
+.detalle-entrega { color: var(--tinta-suave); font-size: 0.85rem; }
