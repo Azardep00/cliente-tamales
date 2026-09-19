@@ -1,0 +1,55 @@
+<section class="contenedor pagina-auth">
+  <div class="tarjeta caja-auth">
+    <h1>Crea tu cuenta</h1>
+    <p class="subtitulo">Regístrate para hacer pedidos.</p>
+
+    <form [formGroup]="form" (ngSubmit)="enviar()">
+      <div class="fila-2">
+        <div class="campo">
+          <label for="nombre">Nombre</label>
+          <input id="nombre" type="text" formControlName="nombre" />
+        </div>
+        <div class="campo">
+          <label for="apellido">Apellido</label>
+          <input id="apellido" type="text" formControlName="apellido" />
+        </div>
+      </div>
+
+      <div class="campo">
+        <label for="correo">Correo</label>
+        <input id="correo" type="email" formControlName="correo" />
+      </div>
+
+      <div class="campo">
+        <label for="telefono">Teléfono</label>
+        <input id="telefono" type="tel" formControlName="telefono" />
+      </div>
+
+      <div class="campo">
+        <label for="direccion">Dirección de entrega</label>
+        <input id="direccion" type="text" formControlName="direccion" />
+      </div>
+
+      <div class="campo">
+        <label for="fechaNacimiento">Fecha de nacimiento</label>
+        <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" />
+      </div>
+
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <input id="contrasena" type="password" formControlName="contrasena" />
+        <span class="ayuda">Mínimo 6 caracteres.</span>
+      </div>
+
+      @if (error()) {
+        <p class="mensaje-error mensaje-general">{{ error() }}</p>
+      }
+
+      <button type="submit" class="boton boton-primario boton-ancho" [disabled]="enviando()">
+        {{ enviando() ? 'Creando cuenta...' : 'Crear cuenta' }}
+      </button>
+    </form>
+
+    <p class="pie-auth">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+  </div>
+</section>

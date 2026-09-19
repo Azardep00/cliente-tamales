@@ -1,0 +1,38 @@
+<section class="contenedor checkout">
+  <h1>Confirmar pedido</h1>
+
+  @if (carrito.items().length === 0) {
+    <div class="estado-vacio">
+      <h3>No tienes nada en el carrito</h3>
+      <a routerLink="/catalogo" class="boton boton-primario">Ver catálogo</a>
+    </div>
+  } @else {
+    <div class="tarjeta resumen-checkout">
+      <h3>Resumen</h3>
+      @for (item of carrito.items(); track item.producto.idProducto) {
+        <div class="linea">
+          <span>{{ item.cantidad }} × {{ item.producto.nombre }}</span>
+          <span>{{ formatearPrecio(item.producto.precio * item.cantidad) }}</span>
+        </div>
+      }
+      <div class="linea linea-total">
+        <span>Total</span>
+        <span>{{ formatearPrecio(carrito.total()) }}</span>
+      </div>
+    </div>
+
+    <div class="tarjeta datos-entrega">
+      <h3>Entregar a</h3>
+      <p>{{ auth.sesion()?.nombre }} {{ auth.sesion()?.apellido }}</p>
+      <p class="detalle-entrega">{{ auth.sesion()?.correo }}</p>
+    </div>
+
+    @if (error()) {
+      <p class="mensaje-error">{{ error() }}</p>
+    }
+
+    <button type="button" class="boton boton-primario boton-ancho" [disabled]="enviando()" (click)="confirmarPedido()">
+      {{ enviando() ? 'Enviando pedido...' : 'Confirmar y enviar pedido' }}
+    </button>
+  }
+</section>

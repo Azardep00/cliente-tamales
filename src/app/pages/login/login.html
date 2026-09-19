@@ -1,0 +1,33 @@
+<section class="contenedor pagina-auth">
+  <div class="tarjeta caja-auth">
+    <h1>Inicia sesión</h1>
+    <p class="subtitulo">Para hacer un pedido y ver tu historial.</p>
+
+    <form [formGroup]="form" (ngSubmit)="enviar()">
+      <div class="campo">
+        <label for="correo">Correo</label>
+        <input id="correo" type="email" formControlName="correo"
+               [class.con-error]="form.controls.correo.touched && form.controls.correo.invalid" />
+        @if (form.controls.correo.touched && form.controls.correo.invalid) {
+          <span class="mensaje-error">Ingresa un correo válido.</span>
+        }
+      </div>
+
+      <div class="campo">
+        <label for="contrasena">Contraseña</label>
+        <input id="contrasena" type="password" formControlName="contrasena"
+               [class.con-error]="form.controls.contrasena.touched && form.controls.contrasena.invalid" />
+      </div>
+
+      @if (error()) {
+        <p class="mensaje-error mensaje-general">{{ error() }}</p>
+      }
+
+      <button type="submit" class="boton boton-primario boton-ancho" [disabled]="enviando()">
+        {{ enviando() ? 'Ingresando...' : 'Ingresar' }}
+      </button>
+    </form>
+
+    <p class="pie-auth">¿No tienes cuenta? <a routerLink="/registro">Regístrate</a></p>
+  </div>
+</section>

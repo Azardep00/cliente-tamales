@@ -1,0 +1,23 @@
+.mis-pedidos { padding-block: 32px 60px; max-width: 640px; margin-inline: auto; }
+.mis-pedidos h1 { margin-bottom: 20px; }
+
+.lista-pedidos { display: flex; flex-direction: column; gap: 16px; }
+.pedido { padding: 18px; }
+
+.pedido-encabezado { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.pedido-fecha { font-size: 0.8rem; color: var(--tinta-suave); margin-top: 2px; }
+
+.insignia { text-transform: none; }
+.insignia-pendiente { background: #f0ad4e; color: #fff; }
+.insignia-confirmado { background: #5bc0de; color: #fff; }
+.insignia-en_preparacion { background: #0275d8; color: #fff; }
+.insignia-entregado { background: var(--exito); color: #fff; }
+.insignia-cancelado { background: var(--peligro); color: #fff; }
+
+.pedido-detalles { border-top: 1px solid var(--crema-borde); border-bottom: 1px solid var(--crema-borde); padding-block: 10px; margin-bottom: 10px; }
+.linea { display: flex; justify-content: space-between; font-size: 0.88rem; padding-block: 3px; }
+
+.pedido-pie { display: flex; justify-content: space-between; align-items: center; }
+.pedido-total { font-weight: 700; }
+.boton-peligro-texto { background: none; border: none; color: var(--peligro); font-size: 0.85rem; font-weight: 600; }
+.boton-peligro-texto:disabled { opacity: 0.5; }
