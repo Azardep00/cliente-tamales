@@ -1,0 +1,10 @@
+.catalogo { padding-block: 32px 60px; }
+.catalogo h1 { margin-bottom: 20px; }
+
+.filtros { display: flex; gap: 10px; margin-bottom: 24px; }
+
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 20px;
+}

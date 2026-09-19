@@ -1,0 +1,39 @@
+<section class="contenedor carrito">
+  <h1>Tu carrito</h1>
+
+  @if (carrito.items().length === 0) {
+    <div class="estado-vacio">
+      <h3>Tu carrito está vacío</h3>
+      <p>Agrega tamales o lechona desde el catálogo.</p>
+      <a routerLink="/catalogo" class="boton boton-primario">Ver catálogo</a>
+    </div>
+  } @else {
+    <div class="items-carrito">
+      @for (item of carrito.items(); track item.producto.idProducto) {
+        <div class="tarjeta item">
+          <div class="item-info">
+            <h3>{{ item.producto.nombre }}</h3>
+            <p>{{ formatearPrecio(item.producto.precio) }} c/u</p>
+          </div>
+
+          <div class="item-cantidad">
+            <button type="button" (click)="carrito.actualizarCantidad(item.producto.idProducto, item.cantidad - 1)">−</button>
+            <span>{{ item.cantidad }}</span>
+            <button type="button" (click)="carrito.actualizarCantidad(item.producto.idProducto, item.cantidad + 1)">+</button>
+          </div>
+
+          <span class="item-subtotal">{{ formatearPrecio(item.producto.precio * item.cantidad) }}</span>
+
+          <button type="button" class="item-quitar" (click)="carrito.quitar(item.producto.idProducto)">Quitar</button>
+        </div>
+      }
+    </div>
+
+    <div class="resumen">
+      <span>Total</span>
+      <span class="resumen-total">{{ formatearPrecio(carrito.total()) }}</span>
+    </div>
+
+    <button type="button" class="boton boton-primario boton-ancho">Continuar al pedido</button>
+  }
+</section>

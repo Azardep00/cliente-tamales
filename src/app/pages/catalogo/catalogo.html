@@ -1,0 +1,37 @@
+<section class="contenedor catalogo">
+  <h1>Catálogo</h1>
+
+  <div class="filtros">
+    <button type="button" class="boton" [class.boton-primario]="filtro() === 'TODOS'"
+            [class.boton-secundario]="filtro() !== 'TODOS'" (click)="cambiarFiltro('TODOS')">
+      Todos
+    </button>
+    <button type="button" class="boton" [class.boton-primario]="filtro() === 'Tamal'"
+            [class.boton-secundario]="filtro() !== 'Tamal'" (click)="cambiarFiltro('Tamal')">
+      Tamales
+    </button>
+    <button type="button" class="boton" [class.boton-primario]="filtro() === 'Lechona'"
+            [class.boton-secundario]="filtro() !== 'Lechona'" (click)="cambiarFiltro('Lechona')">
+      Lechona
+    </button>
+  </div>
+
+  @if (cargando()) {
+    <p>Cargando productos...</p>
+  } @else if (error()) {
+    <div class="estado-vacio">
+      <h3>No se pudo cargar el catálogo</h3>
+      <p>{{ error() }}</p>
+    </div>
+  } @else if (productosFiltrados().length === 0) {
+    <div class="estado-vacio">
+      <h3>No hay productos en esta categoría</h3>
+    </div>
+  } @else {
+    <div class="grid-productos">
+      @for (producto of productosFiltrados(); track producto.idProducto) {
+        <app-producto-card [producto]="producto" (agregar)="agregarAlCarrito($event)" />
+      }
+    </div>
+  }
+</section>

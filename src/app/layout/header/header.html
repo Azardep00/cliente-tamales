@@ -1,0 +1,15 @@
+<header class="cabecera">
+  <div class="contenedor cabecera-inner">
+    <a routerLink="/" class="marca">
+      <span class="marca-nombre">Tamales &amp; Lechona</span>
+      <span class="marca-lugar">Distribuidora tolimense</span>
+    </a>
+
+    <a routerLink="/carrito" class="enlace-carrito">
+      Carrito
+      @if (carrito.cantidadTotal() > 0) {
+        <span class="contador">{{ carrito.cantidadTotal() }}</span>
+      }
+    </a>
+  </div>
+</header>
