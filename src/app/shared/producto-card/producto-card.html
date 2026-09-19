@@ -1,0 +1,24 @@
+<article class="tarjeta producto-card">
+  <div class="producto-encabezado">
+    <span class="producto-tipo">{{ producto().tipoProducto }}</span>
+    @if (producto().stock <= 3 && producto().stock > 0) {
+      <span class="producto-stock-bajo">Quedan {{ producto().stock }}</span>
+    }
+  </div>
+
+  <h3>{{ producto().nombre }}</h3>
+  <p class="producto-detalle">{{ producto().detalleEspecifico }}</p>
+  <p class="producto-descripcion">{{ producto().descripcion }}</p>
+
+  <div class="producto-pie">
+    <span class="producto-precio">{{ formatearPrecio(producto().precio) }}</span>
+
+    @if (producto().stock > 0) {
+      <button type="button" class="boton boton-primario" (click)="agregar.emit(producto())">
+        Agregar
+      </button>
+    } @else {
+      <span class="producto-agotado">Agotado</span>
+    }
+  </div>
+</article>

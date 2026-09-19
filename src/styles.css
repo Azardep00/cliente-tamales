@@ -1,1 +1,56 @@
-/* You can add global styles to this file, and also import other style files */
+/* Distribuidora de Tamales y Lechona — sistema de diseño.
+   Paleta basada en los materiales reales del producto: hoja de bijao
+   (verde), masa de maíz (crema), achiote (rojo tostado). */
+
+:root {
+  --verde-hoja: #16301f;
+  --verde-hoja-suave: #234a30;
+  --crema-masa: #fbf1de;
+  --crema-borde: #e2d2a8;
+  --achiote: #b8410f;
+  --achiote-oscuro: #8f3009;
+  --oro-maiz: #d6a23c;
+  --tinta: #241811;
+  --tinta-suave: #5a4a3c;
+  --peligro: #a3341f;
+  --exito: #2f6b3f;
+
+  --fuente-titulo: "Georgia", "Times New Roman", serif;
+  --fuente-cuerpo: -apple-system, "Segoe UI", sans-serif;
+
+  --ancho-contenido: 1180px;
+  --radio-tarjeta: 4px 22px 4px 22px;
+  --radio-chico: 4px 12px 4px 12px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--fuente-cuerpo);
+  color: var(--tinta);
+  background: var(--crema-masa);
+  line-height: 1.5;
+}
+
+h1, h2, h3 { font-family: var(--fuente-titulo); margin: 0; color: var(--tinta); line-height: 1.15; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+.contenedor { width: 100%; max-width: var(--ancho-contenido); margin-inline: auto; padding-inline: 24px; }
+
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 12px 22px; border-radius: var(--radio-chico); border: 2px solid transparent;
+  font-weight: 600; font-size: 0.95rem; transition: background 0.15s ease;
+}
+.boton-primario { background: var(--achiote); color: var(--crema-masa); }
+.boton-primario:hover { background: var(--achiote-oscuro); }
+.boton-primario:disabled { background: var(--crema-borde); color: var(--tinta-suave); cursor: not-allowed; }
+.boton-secundario { background: transparent; border-color: var(--verde-hoja); color: var(--verde-hoja); }
+.boton-secundario:hover { background: var(--verde-hoja); color: var(--crema-masa); }
+
+.tarjeta { background: #fff; border: 1px solid var(--crema-borde); border-radius: var(--radio-tarjeta); }
+
+.estado-vacio { text-align: center; padding: 60px 24px; color: var(--tinta-suave); }

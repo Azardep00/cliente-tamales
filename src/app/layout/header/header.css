@@ -1,0 +1,18 @@
+.cabecera { background: var(--verde-hoja); padding-block: 16px; }
+.cabecera-inner { display: flex; align-items: center; justify-content: space-between; }
+
+.marca { display: flex; flex-direction: column; color: var(--crema-masa); }
+.marca-nombre { font-family: var(--fuente-titulo); font-size: 1.3rem; font-weight: 700; }
+.marca-lugar { font-size: 0.78rem; color: var(--oro-maiz); }
+
+.enlace-carrito {
+  position: relative; color: var(--crema-masa); font-weight: 600;
+  padding: 8px 14px; border-radius: var(--radio-chico); border: 1.5px solid var(--verde-hoja-suave);
+}
+.enlace-carrito:hover { border-color: var(--oro-maiz); }
+
+.contador {
+  position: absolute; top: -8px; right: -8px; background: var(--achiote); color: #fff;
+  font-size: 0.7rem; font-weight: 700; border-radius: 999px; min-width: 18px; height: 18px;
+  display: flex; align-items: center; justify-content: center; padding-inline: 4px;
+}

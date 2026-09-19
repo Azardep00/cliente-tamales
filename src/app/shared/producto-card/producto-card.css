@@ -1,0 +1,13 @@
+.producto-card { padding: 18px; display: flex; flex-direction: column; gap: 8px; height: 100%; }
+
+.producto-encabezado { display: flex; justify-content: space-between; align-items: center; }
+.producto-tipo { font-size: 0.75rem; font-weight: 700; color: var(--verde-hoja); }
+.producto-stock-bajo { font-size: 0.72rem; color: var(--achiote); font-weight: 600; }
+
+.producto-card h3 { font-size: 1.15rem; }
+.producto-detalle { font-size: 0.85rem; color: var(--tinta-suave); font-weight: 600; }
+.producto-descripcion { font-size: 0.88rem; color: var(--tinta-suave); flex: 1; }
+
+.producto-pie { display: flex; align-items: center; justify-content: space-between; margin-top: 8px; }
+.producto-precio { font-size: 1.2rem; font-weight: 700; color: var(--achiote); }
+.producto-agotado { font-size: 0.85rem; color: var(--tinta-suave); font-style: italic; }
