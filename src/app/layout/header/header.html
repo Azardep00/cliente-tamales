@@ -5,11 +5,21 @@
       <span class="marca-lugar">Distribuidora tolimense</span>
     </a>
 
-    <a routerLink="/carrito" class="enlace-carrito">
-      Carrito
-      @if (carrito.cantidadTotal() > 0) {
-        <span class="contador">{{ carrito.cantidadTotal() }}</span>
+    <nav class="nav-derecha">
+      @if (auth.estaAutenticado()) {
+        <a routerLink="/mis-pedidos" class="enlace">Mis pedidos</a>
+        <span class="saludo">Hola, {{ auth.sesion()?.nombre }}</span>
+        <button type="button" class="enlace enlace-boton" (click)="salir()">Salir</button>
+      } @else {
+        <a routerLink="/login" class="enlace">Ingresar</a>
       }
-    </a>
+
+      <a routerLink="/carrito" class="enlace-carrito">
+        Carrito
+        @if (carrito.cantidadTotal() > 0) {
+          <span class="contador">{{ carrito.cantidadTotal() }}</span>
+        }
+      </a>
+    </nav>
   </div>
 </header>
