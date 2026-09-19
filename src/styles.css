@@ -54,3 +54,17 @@ button { font-family: inherit; cursor: pointer; }
 .tarjeta { background: #fff; border: 1px solid var(--crema-borde); border-radius: var(--radio-tarjeta); }
 
 .estado-vacio { text-align: center; padding: 60px 24px; color: var(--tinta-suave); }
+.estado-vacio .boton { margin-top: 16px; }
+
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.campo label { font-size: 0.85rem; font-weight: 600; color: var(--tinta-suave); }
+.campo input {
+  padding: 10px 13px; border: 1.5px solid var(--crema-borde); border-radius: 10px;
+  background: #fff; color: var(--tinta);
+}
+.campo input:focus { border-color: var(--achiote); outline: none; }
+.campo input.con-error { border-color: var(--peligro); }
+.mensaje-error { color: var(--peligro); font-size: 0.85rem; }
+.boton-ancho { width: 100%; }
+
+.insignia { display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
