@@ -41,6 +41,7 @@ export class Registro {
 
     this.auth
       .registrar({
+        tipoUsuario: 'Cliente',
         nombre: v.nombre,
         apellido: v.apellido,
         telefono: v.telefono,
@@ -54,13 +55,4 @@ export class Registro {
       })
       .subscribe({
         next: () => {
-          // Después de registrarse, lo mandamos derecho a loguearse.
           this.router.navigate(['/login']);
-        },
-        error: (err: Error) => {
-          this.error.set(err.message);
-          this.enviando.set(false);
-        },
-      });
-  }
-}

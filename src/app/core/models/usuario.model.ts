@@ -15,6 +15,7 @@ export interface Usuario {
 }
 
 export interface RegistroClienteRequest {
+  tipoUsuario: 'Cliente';
   nombre: string;
   apellido: string;
   telefono: string;
@@ -32,7 +33,6 @@ export interface LoginRequest {
   contrasena: string;
 }
 
-// Ahora sí trae token: el backend ya emite JWT en el login.
 export interface LoginResponse {
   idUsuario: number;
   nombre: string;
