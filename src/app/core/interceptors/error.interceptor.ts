@@ -11,6 +11,10 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         mensaje = 'No se pudo conectar con el servidor. Revisa que el backend esté corriendo.';
       } else if (error.error && typeof error.error === 'object' && 'mensaje' in error.error) {
         mensaje = String((error.error as { mensaje: unknown }).mensaje);
+      } else if (error.status === 401) {
+        mensaje = 'Debes iniciar sesión para hacer esto.';
+      } else if (error.status === 403) {
+        mensaje = 'No tienes permiso para hacer esta acción.';
       }
 
       return throwError(() => new Error(mensaje));

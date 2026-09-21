@@ -1,6 +1,5 @@
 export type TipoCliente = 'NUEVO' | 'FRECUENTE' | 'PREMIUM';
 
-// La contraseña nunca viaja de vuelta (WRITE_ONLY en el backend).
 export interface Usuario {
   idUsuario: number;
   nombre: string;
@@ -8,7 +7,7 @@ export interface Usuario {
   telefono: string;
   correo: string;
   estado: boolean;
-  fechaNacimiento: string; // yyyy-MM-dd
+  fechaNacimiento: string;
   tipoUsuario: 'Cliente' | 'Empleado';
   tipoCliente?: TipoCliente;
   direccion?: string;
@@ -33,12 +32,12 @@ export interface LoginRequest {
   contrasena: string;
 }
 
-// El backend no usa JWT: el login solo confirma credenciales y devuelve
-// estos datos básicos. La "sesión" se guarda del lado del navegador.
+// Ahora sí trae token: el backend ya emite JWT en el login.
 export interface LoginResponse {
   idUsuario: number;
   nombre: string;
   apellido: string;
   correo: string;
   tipoUsuario: 'Cliente' | 'Empleado';
+  token: string;
 }
