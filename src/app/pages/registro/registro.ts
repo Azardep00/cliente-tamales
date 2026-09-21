@@ -56,3 +56,11 @@ export class Registro {
       .subscribe({
         next: () => {
           this.router.navigate(['/login']);
+        },
+        error: (err: Error) => {
+          this.error.set(err.message);
+          this.enviando.set(false);
+        },
+      });
+  }
+}
