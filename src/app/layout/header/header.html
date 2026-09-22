@@ -8,6 +8,7 @@
     <nav class="nav-derecha">
       @if (auth.estaAutenticado()) {
         <a routerLink="/mis-pedidos" class="enlace">Mis pedidos</a>
+        <a routerLink="/perfil" class="enlace">Mi perfil</a>
         <span class="saludo">Hola, {{ auth.sesion()?.nombre }}</span>
         <button type="button" class="enlace enlace-boton" (click)="salir()">Salir</button>
       } @else {
