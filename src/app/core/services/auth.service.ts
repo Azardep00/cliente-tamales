@@ -6,8 +6,6 @@ import { LoginRequest, LoginResponse, RegistroClienteRequest, Usuario } from '..
 
 const CLAVE_SESION = 'tamaleslechona.sesion';
 
-// No hay JWT: el "login" solo valida correo+contraseña contra el backend y
-// devuelve datos básicos. Guardamos eso en localStorage como bandera de sesión.
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly http = inject(HttpClient);
@@ -29,6 +27,15 @@ export class AuthService {
   cerrarSesion(): void {
     this._sesion.set(null);
     localStorage.removeItem(CLAVE_SESION);
+  }
+
+  // Se llama después de editar el perfil, para que el header y demás
+  // pantallas reflejen el nombre/correo nuevo sin obligar a re-loguearse
+  // (el token sigue siendo válido, solo cambian estos datos de exhibición).
+  actualizarDatosSesion(cambios: Partial<Pick<LoginResponse, 'nombre' | 'apellido' | 'correo'>>): void {
+    const actual = this._sesion();
+    if (!actual) return;
+    this.guardar({ ...actual, ...cambios });
   }
 
   private guardar(sesion: LoginResponse): void {
