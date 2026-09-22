@@ -1,2 +1,5 @@
-// URL base del backend Spring Boot. En desarrollo corre en localhost:8080.
-export const API_BASE_URL = 'http://localhost:8080/api';
+import { environment } from '../../../environments/environment';
+
+// URL base del backend Spring Boot. Cambia automáticamente según el entorno
+// (ver environment.ts para desarrollo y environment.prod.ts para producción).
+export const API_BASE_URL = `${environment.apiUrl}/api`;
