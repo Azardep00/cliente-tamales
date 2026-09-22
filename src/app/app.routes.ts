@@ -5,6 +5,7 @@ import { Login } from './pages/login/login';
 import { Registro } from './pages/registro/registro';
 import { Checkout } from './pages/checkout/checkout';
 import { MisPedidos } from './pages/mis-pedidos/mis-pedidos';
+import { Perfil } from './pages/perfil/perfil';
 import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
@@ -15,5 +16,6 @@ export const routes: Routes = [
   { path: 'registro', component: Registro },
   { path: 'checkout', component: Checkout, canActivate: [authGuard] },
   { path: 'mis-pedidos', component: MisPedidos, canActivate: [authGuard] },
+  { path: 'perfil', component: Perfil, canActivate: [authGuard] },
   { path: '**', redirectTo: 'catalogo' },
 ];
