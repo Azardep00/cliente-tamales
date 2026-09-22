@@ -1,0 +1,83 @@
+<section class="contenedor perfil">
+  <h1>Mi perfil</h1>
+
+  @if (cargando()) {
+    <p>Cargando tus datos...</p>
+  } @else {
+    <div class="tarjeta bloque-perfil">
+      <h3>Mis datos</h3>
+
+      <form [formGroup]="formDatos" (ngSubmit)="guardarDatos()">
+        <div class="fila-2">
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" type="text" formControlName="nombre" />
+          </div>
+          <div class="campo">
+            <label for="apellido">Apellido</label>
+            <input id="apellido" type="text" formControlName="apellido" />
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="correo">Correo</label>
+          <input id="correo" type="email" formControlName="correo" />
+        </div>
+
+        <div class="campo">
+          <label for="telefono">Teléfono</label>
+          <input id="telefono" type="tel" formControlName="telefono" />
+        </div>
+
+        <div class="campo">
+          <label for="direccion">Dirección de entrega</label>
+          <input id="direccion" type="text" formControlName="direccion" />
+        </div>
+
+        <div class="campo">
+          <label for="fechaNacimiento">Fecha de nacimiento</label>
+          <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" />
+        </div>
+
+        @if (errorDatos()) {
+          <p class="mensaje-error">{{ errorDatos() }}</p>
+        }
+        @if (exitoDatos()) {
+          <p class="mensaje-exito">Tus datos se actualizaron correctamente.</p>
+        }
+
+        <button type="submit" class="boton boton-primario" [disabled]="guardandoDatos()">
+          {{ guardandoDatos() ? 'Guardando...' : 'Guardar cambios' }}
+        </button>
+      </form>
+    </div>
+
+    <div class="tarjeta bloque-perfil">
+      <h3>Cambiar contraseña</h3>
+
+      <form [formGroup]="formContrasena" (ngSubmit)="cambiarContrasena()">
+        <div class="campo">
+          <label for="contrasenaActual">Contraseña actual</label>
+          <input id="contrasenaActual" type="password" formControlName="contrasenaActual" />
+        </div>
+
+        <div class="campo">
+          <label for="contrasenaNueva">Contraseña nueva</label>
+          <input id="contrasenaNueva" type="password" formControlName="contrasenaNueva" />
+          <span class="ayuda">Mínimo 6 caracteres.</span>
+        </div>
+
+        @if (errorContrasena()) {
+          <p class="mensaje-error">{{ errorContrasena() }}</p>
+        }
+        @if (exitoContrasena()) {
+          <p class="mensaje-exito">Contraseña actualizada correctamente.</p>
+        }
+
+        <button type="submit" class="boton boton-secundario" [disabled]="cambiandoContrasena()">
+          {{ cambiandoContrasena() ? 'Cambiando...' : 'Cambiar contraseña' }}
+        </button>
+      </form>
+    </div>
+  }
+</section>
