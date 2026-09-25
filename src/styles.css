@@ -61,6 +61,8 @@ button { font-family: inherit; cursor: pointer; }
 .campo input {
   padding: 10px 13px; border: 1.5px solid var(--crema-borde); border-radius: 10px;
   background: #fff; color: var(--tinta);
+  width: 100%;
+  min-width: 0;
 }
 .campo input:focus { border-color: var(--achiote); outline: none; }
 .campo input.con-error { border-color: var(--peligro); }
