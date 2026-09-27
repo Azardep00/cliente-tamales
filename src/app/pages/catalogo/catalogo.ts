@@ -4,12 +4,13 @@ import { ProductoService } from '../../core/services/producto.service';
 import { CarritoService } from '../../core/services/carrito.service';
 import { Producto } from '../../core/models/producto.model';
 import { ProductoCard } from '../../shared/producto-card/producto-card';
+import { ProductoCardSkeleton } from '../../shared/producto-card-skeleton/producto-card-skeleton';
 
 type Filtro = 'TODOS' | 'Tamal' | 'Lechona';
 
 @Component({
   selector: 'app-catalogo',
-  imports: [ProductoCard, FormsModule],
+  imports: [ProductoCard, FormsModule, ProductoCardSkeleton],
   templateUrl: './catalogo.html',
   styleUrl: './catalogo.css',
 })
