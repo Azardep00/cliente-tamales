@@ -53,7 +53,11 @@
   </div>
 
   @if (cargando()) {
-    <p>Cargando productos...</p>
+    <div class="grid-productos">
+      @for (i of [1,2,3,4,5,6]; track i) {
+        <app-producto-card-skeleton />
+      }
+    </div>
   } @else if (error()) {
     <div class="estado-vacio">
       <h3>No se pudo cargar el catálogo</h3>
