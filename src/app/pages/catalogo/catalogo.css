@@ -8,3 +8,33 @@
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 20px;
 }
+
+.barra-busqueda { margin-bottom: 16px; }
+
+.input-busqueda {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid var(--crema-borde);
+  border-radius: 10px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: var(--tinta);
+}
+.input-busqueda:focus { border-color: var(--achiote); outline: none; }
+
+.filtros { flex-wrap: wrap; align-items: center; }
+
+.filtro-precio { display: flex; align-items: center; gap: 8px; }
+
+.input-precio {
+  width: 110px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--crema-borde);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  background: #fff;
+  color: var(--tinta);
+}
+.input-precio:focus { border-color: var(--achiote); outline: none; }
+
+.filtro-precio__separador { color: var(--tinta-suave); }
