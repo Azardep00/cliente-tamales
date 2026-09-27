@@ -1,6 +1,16 @@
 <section class="contenedor catalogo">
   <h1>Catálogo</h1>
 
+  <div class="barra-busqueda">
+    <input
+      type="text"
+      class="input-busqueda"
+      placeholder="Buscar por nombre..."
+      [ngModel]="busqueda()"
+      (ngModelChange)="onBusquedaChange($event)"
+    />
+  </div>
+
   <div class="filtros">
     <button type="button" class="boton" [class.boton-primario]="filtro() === 'TODOS'"
             [class.boton-secundario]="filtro() !== 'TODOS'" (click)="cambiarFiltro('TODOS')">
@@ -14,6 +24,32 @@
             [class.boton-secundario]="filtro() !== 'Lechona'" (click)="cambiarFiltro('Lechona')">
       Lechona
     </button>
+
+    <div class="filtro-precio">
+      <input
+        type="number"
+        class="input-precio"
+        placeholder="Precio mín"
+        min="0"
+        [ngModel]="precioMin()"
+        (ngModelChange)="onPrecioMinChange($event)"
+      />
+      <span class="filtro-precio__separador">—</span>
+      <input
+        type="number"
+        class="input-precio"
+        placeholder="Precio máx"
+        min="0"
+        [ngModel]="precioMax()"
+        (ngModelChange)="onPrecioMaxChange($event)"
+      />
+    </div>
+
+    @if (hayFiltrosActivos()) {
+      <button type="button" class="boton boton-secundario" (click)="limpiarFiltros()">
+        Limpiar filtros
+      </button>
+    }
   </div>
 
   @if (cargando()) {
@@ -25,7 +61,12 @@
     </div>
   } @else if (productosFiltrados().length === 0) {
     <div class="estado-vacio">
-      <h3>No hay productos en esta categoría</h3>
+      <h3>No hay productos que coincidan con tu búsqueda</h3>
+      @if (hayFiltrosActivos()) {
+        <button type="button" class="boton boton-secundario" (click)="limpiarFiltros()">
+          Limpiar filtros
+        </button>
+      }
     </div>
   } @else {
     <div class="grid-productos">
