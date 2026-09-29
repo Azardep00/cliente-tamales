@@ -1,7 +1,41 @@
 import { Component, inject, signal } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+
+// Telefono colombiano: 7 a 10 digitos, solo numeros (sin espacios ni guiones).
+const PATRON_TELEFONO = /^[0-9]{7,10}$/;
+
+const EDAD_MINIMA = 12;
+
+// Valida que la fecha de nacimiento no sea futura y que la persona
+// tenga al menos EDAD_MINIMA anos. Un Validator custom de Angular
+// recibe el control y devuelve null si es valido, o un objeto de
+// errores si no lo es.
+function fechaNacimientoValida(control: AbstractControl): ValidationErrors | null {
+  const valor = control.value;
+  if (!valor) return null; // el "required" ya se encarga de esto
+
+  const fecha = new Date(valor);
+  if (Number.isNaN(fecha.getTime())) return { fechaInvalida: true };
+
+  const hoy = new Date();
+  if (fecha > hoy) return { fechaFutura: true };
+
+  let edad = hoy.getFullYear() - fecha.getFullYear();
+  const aunNoCumpleEsteAno =
+    hoy.getMonth() < fecha.getMonth() ||
+    (hoy.getMonth() === fecha.getMonth() && hoy.getDate() < fecha.getDate());
+  if (aunNoCumpleEsteAno) edad--;
+
+  return edad < EDAD_MINIMA ? { edadMinima: true } : null;
+}
 
 @Component({
   selector: 'app-registro',
@@ -20,12 +54,39 @@ export class Registro {
   protected readonly form = this.fb.nonNullable.group({
     nombre: ['', Validators.required],
     apellido: ['', Validators.required],
-    telefono: ['', Validators.required],
+    telefono: ['', [Validators.required, Validators.pattern(PATRON_TELEFONO)]],
     correo: ['', [Validators.required, Validators.email]],
     contrasena: ['', [Validators.required, Validators.minLength(6)]],
-    fechaNacimiento: ['', Validators.required],
+    fechaNacimiento: ['', [Validators.required, fechaNacimientoValida]],
     direccion: ['', Validators.required],
   });
+
+  // Usado desde el HTML para pintar el borde rojo y mostrar el mensaje
+  // solo despues de que el usuario ya interactuo con el campo (o tras
+  // un intento de envio), nunca antes de que escriba nada.
+  protected tieneError(campo: string): boolean {
+    const control = this.form.get(campo);
+    return !!control && control.invalid && (control.touched || control.dirty);
+  }
+
+  // Devuelve el primer mensaje que aplique para ese campo.
+  protected mensajeError(campo: string): string {
+    const control = this.form.get(campo);
+    if (!control || !control.errors) return '';
+
+    const errores = control.errors;
+    if (errores['required']) return 'Este campo es obligatorio.';
+    if (errores['email']) return 'Ingresa un correo valido, ej: nombre@correo.com.';
+    if (errores['minlength']) {
+      const min = errores['minlength'].requiredLength;
+      return `Debe tener al menos ${min} caracteres.`;
+    }
+    if (errores['pattern']) return 'Ingresa solo numeros (7 a 10 digitos).';
+    if (errores['fechaFutura']) return 'La fecha no puede ser en el futuro.';
+    if (errores['fechaInvalida']) return 'Ingresa una fecha valida.';
+    if (errores['edadMinima']) return `Debes tener al menos ${EDAD_MINIMA} anos.`;
+    return 'Este campo no es valido.';
+  }
 
   protected enviar(): void {
     if (this.form.invalid) {
