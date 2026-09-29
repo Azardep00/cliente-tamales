@@ -84,7 +84,7 @@ export class Registro {
     if (errores['pattern']) return 'Ingresa solo numeros (7 a 10 digitos).';
     if (errores['fechaFutura']) return 'La fecha no puede ser en el futuro.';
     if (errores['fechaInvalida']) return 'Ingresa una fecha valida.';
-    if (errores['edadMinima']) return `Debes tener al menos ${EDAD_MINIMA} anos.`;
+    if (errores['edadMinima']) return `Debes tener al menos ${EDAD_MINIMA} años.`;
     return 'Este campo no es valido.';
   }
 
