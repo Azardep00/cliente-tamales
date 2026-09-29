@@ -7,38 +7,70 @@
       <div class="fila-2">
         <div class="campo">
           <label for="nombre">Nombre</label>
-          <input id="nombre" type="text" formControlName="nombre" />
+          <input id="nombre" type="text" formControlName="nombre" [class.con-error]="tieneError('nombre')" />
+          @if (tieneError('nombre')) {
+            <span class="mensaje-error">{{ mensajeError('nombre') }}</span>
+          }
         </div>
         <div class="campo">
           <label for="apellido">Apellido</label>
-          <input id="apellido" type="text" formControlName="apellido" />
+          <input id="apellido" type="text" formControlName="apellido" [class.con-error]="tieneError('apellido')" />
+          @if (tieneError('apellido')) {
+            <span class="mensaje-error">{{ mensajeError('apellido') }}</span>
+          }
         </div>
       </div>
 
       <div class="campo">
         <label for="correo">Correo</label>
-        <input id="correo" type="email" formControlName="correo" />
+        <input id="correo" type="email" formControlName="correo" [class.con-error]="tieneError('correo')" />
+        @if (tieneError('correo')) {
+          <span class="mensaje-error">{{ mensajeError('correo') }}</span>
+        }
       </div>
 
       <div class="campo">
         <label for="telefono">Teléfono</label>
-        <input id="telefono" type="tel" formControlName="telefono" />
+        <input id="telefono" type="tel" formControlName="telefono" [class.con-error]="tieneError('telefono')" />
+        @if (tieneError('telefono')) {
+          <span class="mensaje-error">{{ mensajeError('telefono') }}</span>
+        }
       </div>
 
       <div class="campo">
         <label for="direccion">Dirección de entrega</label>
-        <input id="direccion" type="text" formControlName="direccion" />
+        <input id="direccion" type="text" formControlName="direccion" [class.con-error]="tieneError('direccion')" />
+        @if (tieneError('direccion')) {
+          <span class="mensaje-error">{{ mensajeError('direccion') }}</span>
+        }
       </div>
 
       <div class="campo">
         <label for="fechaNacimiento">Fecha de nacimiento</label>
-        <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" />
+        <input
+          id="fechaNacimiento"
+          type="date"
+          formControlName="fechaNacimiento"
+          [class.con-error]="tieneError('fechaNacimiento')"
+        />
+        @if (tieneError('fechaNacimiento')) {
+          <span class="mensaje-error">{{ mensajeError('fechaNacimiento') }}</span>
+        }
       </div>
 
       <div class="campo">
         <label for="contrasena">Contraseña</label>
-        <input id="contrasena" type="password" formControlName="contrasena" />
-        <span class="ayuda">Mínimo 6 caracteres.</span>
+        <input
+          id="contrasena"
+          type="password"
+          formControlName="contrasena"
+          [class.con-error]="tieneError('contrasena')"
+        />
+        @if (tieneError('contrasena')) {
+          <span class="mensaje-error">{{ mensajeError('contrasena') }}</span>
+        } @else {
+          <span class="ayuda">Mínimo 6 caracteres.</span>
+        }
       </div>
 
       @if (error()) {
