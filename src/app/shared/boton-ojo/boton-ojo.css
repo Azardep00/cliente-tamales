@@ -1,0 +1,13 @@
+.boton-ojo {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  display: flex;
+  color: var(--tinta-suave);
+}
+.boton-ojo:hover { color: var(--tinta); }
+.boton-ojo svg { width: 20px; height: 20px; }
