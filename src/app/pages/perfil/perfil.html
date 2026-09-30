@@ -58,12 +58,32 @@
       <form [formGroup]="formContrasena" (ngSubmit)="cambiarContrasena()">
         <div class="campo">
           <label for="contrasenaActual">Contraseña actual</label>
-          <input id="contrasenaActual" type="password" formControlName="contrasenaActual" />
+          <div class="campo-contrasena">
+            <input
+              id="contrasenaActual"
+              [type]="mostrarContrasenaActual() ? 'text' : 'password'"
+              formControlName="contrasenaActual"
+            />
+            <app-boton-ojo
+              [mostrando]="mostrarContrasenaActual()"
+              (alternar)="mostrarContrasenaActual.set(!mostrarContrasenaActual())"
+            />
+          </div>
         </div>
 
         <div class="campo">
           <label for="contrasenaNueva">Contraseña nueva</label>
-          <input id="contrasenaNueva" type="password" formControlName="contrasenaNueva" />
+          <div class="campo-contrasena">
+            <input
+              id="contrasenaNueva"
+              [type]="mostrarContrasenaNueva() ? 'text' : 'password'"
+              formControlName="contrasenaNueva"
+            />
+            <app-boton-ojo
+              [mostrando]="mostrarContrasenaNueva()"
+              (alternar)="mostrarContrasenaNueva.set(!mostrarContrasenaNueva())"
+            />
+          </div>
           <span class="ayuda">Mínimo 6 caracteres.</span>
         </div>
 

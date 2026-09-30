@@ -8,6 +8,7 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { BotonOjo } from '../../shared/boton-ojo/boton-ojo';
 
 // Telefono colombiano: 7 a 10 digitos, solo numeros (sin espacios ni guiones).
 const PATRON_TELEFONO = /^[0-9]{7,10}$/;
@@ -39,7 +40,7 @@ function fechaNacimientoValida(control: AbstractControl): ValidationErrors | nul
 
 @Component({
   selector: 'app-registro',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, BotonOjo],
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })
@@ -50,6 +51,7 @@ export class Registro {
 
   protected readonly enviando = signal(false);
   protected readonly error = signal<string | null>(null);
+    protected readonly mostrarContrasena = signal(false);
 
   protected readonly form = this.fb.nonNullable.group({
     nombre: ['', Validators.required],

@@ -15,8 +15,15 @@
 
       <div class="campo">
         <label for="contrasena">Contraseña</label>
-        <input id="contrasena" type="password" formControlName="contrasena"
-               [class.con-error]="form.controls.contrasena.touched && form.controls.contrasena.invalid" />
+        <div class="campo-contrasena">
+          <input
+            id="contrasena"
+            [type]="mostrarContrasena() ? 'text' : 'password'"
+            formControlName="contrasena"
+            [class.con-error]="form.controls.contrasena.touched && form.controls.contrasena.invalid"
+          />
+          <app-boton-ojo [mostrando]="mostrarContrasena()" (alternar)="mostrarContrasena.set(!mostrarContrasena())" />
+        </div>
       </div>
 
       @if (error()) {
