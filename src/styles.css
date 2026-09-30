@@ -70,3 +70,5 @@ button { font-family: inherit; cursor: pointer; }
 .boton-ancho { width: 100%; }
 
 .insignia { display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+.campo-contrasena { position: relative; }
+.campo-contrasena input { padding-right: 40px; }

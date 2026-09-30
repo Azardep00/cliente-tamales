@@ -3,10 +3,11 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { AuthService } from '../../core/services/auth.service';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { Usuario } from '../../core/models/usuario.model';
+import { BotonOjo } from '../../shared/boton-ojo/boton-ojo';
 
 @Component({
   selector: 'app-perfil',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, BotonOjo],
   templateUrl: './perfil.html',
   styleUrl: './perfil.css',
 })
@@ -25,6 +26,8 @@ export class Perfil {
   protected readonly cambiandoContrasena = signal(false);
   protected readonly errorContrasena = signal<string | null>(null);
   protected readonly exitoContrasena = signal(false);
+    protected readonly mostrarContrasenaActual = signal(false);
+  protected readonly mostrarContrasenaNueva = signal(false);
 
   protected readonly formDatos = this.fb.nonNullable.group({
     nombre: ['', Validators.required],

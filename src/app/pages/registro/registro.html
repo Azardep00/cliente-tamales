@@ -60,12 +60,15 @@
 
       <div class="campo">
         <label for="contrasena">Contraseña</label>
-        <input
-          id="contrasena"
-          type="password"
-          formControlName="contrasena"
-          [class.con-error]="tieneError('contrasena')"
-        />
+        <div class="campo-contrasena">
+          <input
+            id="contrasena"
+            [type]="mostrarContrasena() ? 'text' : 'password'"
+            formControlName="contrasena"
+            [class.con-error]="tieneError('contrasena')"
+          />
+          <app-boton-ojo [mostrando]="mostrarContrasena()" (alternar)="mostrarContrasena.set(!mostrarContrasena())" />
+        </div>
         @if (tieneError('contrasena')) {
           <span class="mensaje-error">{{ mensajeError('contrasena') }}</span>
         } @else {

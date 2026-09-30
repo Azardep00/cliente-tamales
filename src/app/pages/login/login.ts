@@ -2,10 +2,11 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
+import { BotonOjo } from '../../shared/boton-ojo/boton-ojo';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, BotonOjo],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
@@ -17,6 +18,7 @@ export class Login {
 
   protected readonly enviando = signal(false);
   protected readonly error = signal<string | null>(null);
+  protected readonly mostrarContrasena = signal(false);
 
   protected readonly form = this.fb.nonNullable.group({
     correo: ['', [Validators.required, Validators.email]],
