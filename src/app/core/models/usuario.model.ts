@@ -62,4 +62,5 @@ export interface LoginResponse {
   correo: string;
   tipoUsuario: 'Cliente' | 'Empleado';
   token: string;
+  refreshToken: string;
 }
