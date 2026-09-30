@@ -1,0 +1,19 @@
+<button
+  type="button"
+  class="boton-ojo"
+  (click)="alternar.emit()"
+  [attr.aria-label]="mostrando ? 'Ocultar contraseña' : 'Mostrar contraseña'"
+>
+  @if (mostrando) {
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path
+        d="M3 3l18 18M10.6 10.6a2 2 0 002.8 2.8M9.4 5.5A10.9 10.9 0 0112 5c5 0 9 4 10.5 7-0.6 1.2-1.5 2.6-2.7 3.8M6.7 6.7C4.6 8 3 10 1.5 12c1.5 3 5.5 7 10.5 7 1.2 0 2.4-0.2 3.5-0.6"
+      />
+    </svg>
+  } @else {
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+      <path d="M1.5 12S5.5 5 12 5s10.5 7 10.5 7-4 7-10.5 7S1.5 12 1.5 12z" />
+      <circle cx="12" cy="12" r="3" />
+    </svg>
+  }
+</button>
