@@ -21,6 +21,9 @@
             </div>
             <span class="insignia insignia-{{ pedido.estado.toLowerCase() }}">{{ pedido.estado }}</span>
           </div>
+          @if (pedido.estadoPagoWompi) {
+            <p class="pedido-fecha">Pago Wompi: {{ formatearEstadoPago(pedido.estadoPagoWompi) }}</p>
+          }
 
           <div class="pedido-detalles">
             @for (d of pedido.detalles; track d.idDetallePedido) {

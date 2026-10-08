@@ -1,0 +1,27 @@
+<section class="contenedor resultado-pago">
+  <div class="tarjeta contenido-resultado">
+    <h1>Resultado del pago</h1>
+
+    @if (consultando()) {
+      <p>Estamos verificando la transacción directamente con Wompi...</p>
+    } @else if (error()) {
+      <p class="mensaje-error">{{ error() }}</p>
+      @if (tieneDatosTransaccion) {
+        <button type="button" class="boton boton-secundario" (click)="consultarEstado()">Consultar de nuevo</button>
+      }
+      <a routerLink="/mis-pedidos" class="boton boton-secundario">Ver mis pedidos</a>
+    } @else if (estado()?.estadoPago === 'APPROVED') {
+      <p>¡Pago aprobado! Tu pedido #{{ estado()?.idPedido }} quedó confirmado.</p>
+      <a routerLink="/mis-pedidos" class="boton boton-primario">Ver mis pedidos</a>
+    } @else if (estado()?.estadoPago === 'PENDING') {
+      <p>Wompi todavía está procesando el pago. El pedido se confirmará cuando recibamos la aprobación.</p>
+      <button type="button" class="boton boton-secundario" (click)="consultarEstado()">Consultar de nuevo</button>
+    } @else if (estado()) {
+      <p>Wompi no aprobó el pago. Puedes intentarlo de nuevo sin crear otro pedido.</p>
+      <button type="button" class="boton boton-primario" [disabled]="preparandoReintento()" (click)="reintentarPago()">
+        {{ preparandoReintento() ? 'Preparando pago...' : 'Reintentar pago' }}
+      </button>
+      <a routerLink="/mis-pedidos" class="boton boton-secundario">Ver mis pedidos</a>
+    }
+  </div>
+</section>

@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../core/services/carrito.service';
 import { AuthService } from '../../core/services/auth.service';
-import { PedidoService } from '../../core/services/pedido.service';
+import { WompiService } from '../../core/services/wompi.service';
 
 @Component({
   selector: 'app-checkout',
@@ -13,8 +13,7 @@ import { PedidoService } from '../../core/services/pedido.service';
 export class Checkout {
   protected readonly carrito = inject(CarritoService);
   protected readonly auth = inject(AuthService);
-  private readonly pedidoService = inject(PedidoService);
-  private readonly router = inject(Router);
+  private readonly wompi = inject(WompiService);
 
   protected readonly enviando = signal(false);
   protected readonly error = signal<string | null>(null);
@@ -39,10 +38,14 @@ export class Checkout {
       cantidad: i.cantidad,
     }));
 
-    this.pedidoService.crear({ idCliente: sesion.idUsuario, detalles }).subscribe({
-      next: (pedido) => {
-        this.carrito.vaciar();
-        this.router.navigate(['/mis-pedidos'], { state: { pedidoRecienCreado: pedido.idPedido } });
+    this.wompi.iniciarCheckout(detalles).subscribe({
+      next: (checkout) => {
+        try {
+          this.wompi.redirigirAlCheckout(checkout);
+        } catch (err) {
+          this.error.set(err instanceof Error ? err.message : 'No se pudo abrir el pago de Wompi.');
+          this.enviando.set(false);
+        }
       },
       error: (err: Error) => {
         this.error.set(err.message);
