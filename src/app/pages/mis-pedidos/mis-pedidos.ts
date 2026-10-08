@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { PedidoService } from '../../core/services/pedido.service';
-import { Pedido } from '../../core/models/pedido.model';
+import { EstadoPagoWompi, Pedido } from '../../core/models/pedido.model';
 
 @Component({
   selector: 'app-mis-pedidos',
@@ -40,8 +40,21 @@ export class MisPedidos {
     }).format(new Date(iso));
   }
 
+  protected formatearEstadoPago(estado: EstadoPagoWompi): string {
+    return {
+      PENDING: 'Pendiente',
+      APPROVED: 'Aprobado',
+      DECLINED: 'Rechazado',
+      VOIDED: 'Anulado',
+      ERROR: 'Error',
+    }[estado];
+  }
+
   protected puedeCancelar(pedido: Pedido): boolean {
-    return pedido.estado === 'PENDIENTE' || pedido.estado === 'CONFIRMADO';
+    const pedidoCancelable = pedido.estado === 'PENDIENTE' || pedido.estado === 'CONFIRMADO';
+    const pagoBloqueaCancelacion =
+      pedido.estadoPagoWompi === 'PENDING' || pedido.estadoPagoWompi === 'APPROVED';
+    return pedidoCancelable && !pagoBloqueaCancelacion;
   }
 
   protected cancelar(idPedido: number): void {

@@ -57,3 +57,19 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Wompi
+
+The production checkout uses the public key in `src/environments/environment.prod.ts`.
+The development environment intentionally has no public key, so local development cannot
+accidentally charge real cards. Use a Wompi sandbox public key in `environment.ts` while testing.
+
+Keep the private key, integrity secret, and events secret only in the backend's ignored
+`application-local.properties`, or provide them as `WOMPI_PRIVATE_KEY`,
+`WOMPI_INTEGRITY_SECRET`, and `WOMPI_EVENTS_SECRET` environment variables. The events secret
+is separate from the integrity secret.
+
+Configure the Wompi production webhook URL as
+`https://<backend-host>/api/pagos/wompi/eventos`. The backend defaults to the sandbox API
+(`https://sandbox.wompi.co`) for local testing. For production, set
+`WOMPI_API_URL=https://production.wompi.co` on the deployed backend and use production credentials.
