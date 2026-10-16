@@ -1,4 +1,5 @@
 <section class="contenedor pagina-auth">
+  <app-volver-catalogo />
   <div class="tarjeta caja-auth">
     <h1>Crea tu cuenta</h1>
     <p class="subtitulo">Regístrate para hacer pedidos.</p>
@@ -50,6 +51,8 @@
         <input
           id="fechaNacimiento"
           type="date"
+          min="1900-01-01"
+          [max]="fechaMaxima"
           formControlName="fechaNacimiento"
           [class.con-error]="tieneError('fechaNacimiento')"
         />

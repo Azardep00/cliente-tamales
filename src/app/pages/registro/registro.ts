@@ -9,11 +9,22 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { BotonOjo } from '../../shared/boton-ojo/boton-ojo';
+import { VolverCatalogo } from '../../shared/volver-catalogo/volver-catalogo';
 
 // Telefono colombiano: 7 a 10 digitos, solo numeros (sin espacios ni guiones).
 const PATRON_TELEFONO = /^[0-9]{7,10}$/;
 
 const EDAD_MINIMA = 12;
+
+// Fecha mas reciente permitida en el selector: hoy menos EDAD_MINIMA anos
+// (formato yyyy-MM-dd, el que entiende <input type="date">).
+export function fechaMaximaNacimiento(): string {
+  const d = new Date();
+  d.setFullYear(d.getFullYear() - EDAD_MINIMA);
+  const mm = String(d.getMonth() + 1).padStart(2, '0');
+  const dd = String(d.getDate()).padStart(2, '0');
+  return `${d.getFullYear()}-${mm}-${dd}`;
+}
 
 // Valida que la fecha de nacimiento no sea futura y que la persona
 // tenga al menos EDAD_MINIMA anos. Un Validator custom de Angular
@@ -40,7 +51,7 @@ function fechaNacimientoValida(control: AbstractControl): ValidationErrors | nul
 
 @Component({
   selector: 'app-registro',
-  imports: [ReactiveFormsModule, RouterLink, BotonOjo],
+  imports: [VolverCatalogo, ReactiveFormsModule, RouterLink, BotonOjo],
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })
@@ -49,6 +60,7 @@ export class Registro {
   private readonly auth = inject(AuthService);
   private readonly router = inject(Router);
 
+  protected readonly fechaMaxima = fechaMaximaNacimiento();
   protected readonly enviando = signal(false);
   protected readonly error = signal<string | null>(null);
     protected readonly mostrarContrasena = signal(false);

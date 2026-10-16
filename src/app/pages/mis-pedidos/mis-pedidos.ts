@@ -3,10 +3,11 @@ import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { PedidoService } from '../../core/services/pedido.service';
 import { EstadoPagoWompi, Pedido } from '../../core/models/pedido.model';
+import { VolverCatalogo } from '../../shared/volver-catalogo/volver-catalogo';
 
 @Component({
   selector: 'app-mis-pedidos',
-  imports: [RouterLink],
+  imports: [VolverCatalogo, RouterLink],
   templateUrl: './mis-pedidos.html',
   styleUrl: './mis-pedidos.css',
 })

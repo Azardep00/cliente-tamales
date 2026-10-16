@@ -1,10 +1,11 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../core/services/carrito.service';
+import { VolverCatalogo } from '../../shared/volver-catalogo/volver-catalogo';
 
 @Component({
   selector: 'app-carrito',
-  imports: [RouterLink],
+  imports: [VolverCatalogo, RouterLink],
   templateUrl: './carrito.html',
   styleUrl: './carrito.css',
 })

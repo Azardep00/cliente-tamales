@@ -4,10 +4,12 @@ import { AuthService } from '../../core/services/auth.service';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { Usuario } from '../../core/models/usuario.model';
 import { BotonOjo } from '../../shared/boton-ojo/boton-ojo';
+import { fechaMaximaNacimiento } from '../registro/registro';
+import { VolverCatalogo } from '../../shared/volver-catalogo/volver-catalogo';
 
 @Component({
   selector: 'app-perfil',
-  imports: [ReactiveFormsModule, BotonOjo],
+  imports: [VolverCatalogo, ReactiveFormsModule, BotonOjo],
   templateUrl: './perfil.html',
   styleUrl: './perfil.css',
 })
@@ -16,6 +18,7 @@ export class Perfil {
   private readonly auth = inject(AuthService);
   private readonly usuarioService = inject(UsuarioService);
 
+  protected readonly fechaMaxima = fechaMaximaNacimiento();
   protected readonly cargando = signal(true);
   protected readonly usuario = signal<Usuario | null>(null);
 

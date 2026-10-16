@@ -1,4 +1,5 @@
 <section class="contenedor perfil">
+  <app-volver-catalogo />
   <h1>Mi perfil</h1>
 
   @if (cargando()) {
@@ -36,7 +37,7 @@
 
         <div class="campo">
           <label for="fechaNacimiento">Fecha de nacimiento</label>
-          <input id="fechaNacimiento" type="date" formControlName="fechaNacimiento" />
+          <input id="fechaNacimiento" type="date" min="1900-01-01" [max]="fechaMaxima" formControlName="fechaNacimiento" />
         </div>
 
         @if (errorDatos()) {

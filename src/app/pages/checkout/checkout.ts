@@ -3,10 +3,11 @@ import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../core/services/carrito.service';
 import { AuthService } from '../../core/services/auth.service';
 import { WompiService } from '../../core/services/wompi.service';
+import { VolverCatalogo } from '../../shared/volver-catalogo/volver-catalogo';
 
 @Component({
   selector: 'app-checkout',
-  imports: [RouterLink],
+  imports: [VolverCatalogo, RouterLink],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
