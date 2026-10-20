@@ -1,6 +1,10 @@
 <article class="tarjeta producto-card" [class.tipo-lechona]="producto().tipoProducto === 'Lechona'" [class.agotado]="producto().stock <= 0">
   <div class="producto-banner">
-    <span class="producto-emoji" aria-hidden="true">{{ producto().tipoProducto === 'Lechona' ? '🐖' : '🫔' }}</span>
+    @if (producto().tipoProducto === 'Lechona') {
+      <span class="producto-emoji" aria-hidden="true">🐖</span>
+    } @else {
+      <img class="producto-emoji producto-emoji--tamal" src="/images/tamal-tolimense.png" alt="" aria-hidden="true" />
+    }
     <span class="producto-tipo">{{ producto().tipoProducto }}</span>
     @if (producto().stock <= 3 && producto().stock > 0) {
       <span class="producto-stock-bajo">¡Quedan {{ producto().stock }}!</span>

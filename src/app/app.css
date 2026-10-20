@@ -1,4 +1,13 @@
-main { min-height: 60vh; }
+/* El layout ocupa el alto disponible sin fijar el footer sobre el contenido. */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+app-header { display: block; flex: 0 0 auto; }
+
+main { flex: 1 0 auto; min-height: 0; }
 
 .pie-sitio { background: var(--bijao); color: var(--masa); padding-block: 28px; margin-top: 40px; border-top: 6px solid var(--maiz); }
 .pie-sitio .contenedor { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline; }

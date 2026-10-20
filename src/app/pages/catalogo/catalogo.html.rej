@@ -1,0 +1,10 @@
+diff a/src/app/pages/catalogo/catalogo.html b/src/app/pages/catalogo/catalogo.html	(rejected hunks)
+@@ -21,7 +21,7 @@
+   </div>
+   <div class="filtros">
+     <button type="button" class="chip" [class.activo]="filtro() === 'TODOS'" (click)="cambiarFiltro('TODOS')">Todos</button>
+-    <button type="button" class="chip" [class.activo]="filtro() === 'Tamal'" (click)="cambiarFiltro('Tamal')">🫔 Tamales</button>
++    <button type="button" class="chip" [class.activo]="filtro() === 'Tamal'" (click)="cambiarFiltro('Tamal')"><img class="icono-tamal-chip" src="/images/tamal-tolimense.png" alt="" aria-hidden="true" /> Tamales</button>
+     <button type="button" class="chip" [class.activo]="filtro() === 'Lechona'" (click)="cambiarFiltro('Lechona')">🐖 Lechona</button>
+     <div class="filtro-precio">
+       <input type="number" class="input-precio" placeholder="Precio mín" aria-label="Precio mínimo" min="0"

@@ -48,12 +48,12 @@ export class Catalogo {
     }
 
     const min = this.precioMin();
-    if (min !== null && !Number.isNaN(min)) {
+    if (min !== null && Number.isFinite(min) && min >= 0) {
       lista = lista.filter((p) => p.precio >= min);
     }
 
     const max = this.precioMax();
-    if (max !== null && !Number.isNaN(max)) {
+    if (max !== null && Number.isFinite(max) && max >= 0) {
       lista = lista.filter((p) => p.precio <= max);
     }
 
@@ -68,12 +68,24 @@ export class Catalogo {
     this.busqueda.set(valor);
   }
 
-  protected onPrecioMinChange(valor: string): void {
-    this.precioMin.set(valor === '' ? null : Number(valor));
+  protected onPrecioMinChange(valor: string | number | null): void {
+    const numero = valor === '' || valor === null ? null : Number(valor);
+
+    this.precioMin.set(
+      numero !== null && Number.isFinite(numero) && numero >= 0
+        ? numero
+        : null
+    );
   }
 
-  protected onPrecioMaxChange(valor: string): void {
-    this.precioMax.set(valor === '' ? null : Number(valor));
+  protected onPrecioMaxChange(valor: string | number | null): void {
+    const numero = valor === '' || valor === null ? null : Number(valor);
+
+    this.precioMax.set(
+      numero !== null && Number.isFinite(numero) && numero >= 0
+        ? numero
+        : null
+    );
   }
 
   protected limpiarFiltros(): void {
@@ -84,10 +96,11 @@ export class Catalogo {
   }
 
   protected hayFiltrosActivos(): boolean {
+    const min = this.precioMin();
     return (
       this.filtro() !== 'TODOS' ||
       this.busqueda().trim() !== '' ||
-      this.precioMin() !== null ||
+      (min !== null) ||
       this.precioMax() !== null
     );
   }
