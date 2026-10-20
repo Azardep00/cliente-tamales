@@ -9,7 +9,6 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { BotonOjo } from '../../shared/boton-ojo/boton-ojo';
-import { VolverCatalogo } from '../../shared/volver-catalogo/volver-catalogo';
 
 // Telefono colombiano: 7 a 10 digitos, solo numeros (sin espacios ni guiones).
 const PATRON_TELEFONO = /^[0-9]{7,10}$/;
@@ -51,7 +50,7 @@ function fechaNacimientoValida(control: AbstractControl): ValidationErrors | nul
 
 @Component({
   selector: 'app-registro',
-  imports: [VolverCatalogo, ReactiveFormsModule, RouterLink, BotonOjo],
+  imports: [ReactiveFormsModule, RouterLink, BotonOjo],
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })

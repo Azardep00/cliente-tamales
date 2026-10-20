@@ -3,11 +3,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { BotonOjo } from '../../shared/boton-ojo/boton-ojo';
-import { VolverCatalogo } from '../../shared/volver-catalogo/volver-catalogo';
 
 @Component({
   selector: 'app-login',
-  imports: [VolverCatalogo, ReactiveFormsModule, RouterLink, BotonOjo],
+  imports: [ReactiveFormsModule, RouterLink, BotonOjo],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
