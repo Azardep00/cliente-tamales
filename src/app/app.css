@@ -1,1 +1,6 @@
 main { min-height: 60vh; }
+
+.pie-sitio { background: var(--bijao); color: var(--masa); padding-block: 28px; margin-top: 40px; border-top: 6px solid var(--maiz); }
+.pie-sitio .contenedor { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; align-items: baseline; }
+.pie-sitio strong { font-family: var(--fuente-titulo); font-size: 1.1rem; }
+.pie-sitio span { color: var(--maiz); font-size: 0.85rem; }

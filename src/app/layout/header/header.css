@@ -1,24 +1,48 @@
-.cabecera { background: var(--verde-hoja); padding-block: 16px; }
-.cabecera-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+.cabecera { background: var(--bijao); position: sticky; top: 0; z-index: 50; box-shadow: 0 4px 14px rgba(27, 67, 50, 0.25); }
 
-.marca { display: flex; flex-direction: column; color: var(--crema-masa); }
-.marca-nombre { font-family: var(--fuente-titulo); font-size: 1.3rem; font-weight: 700; }
-.marca-lugar { font-size: 0.78rem; color: var(--oro-maiz); }
+/* Tira festiva tipo papel picado */
+.banderines {
+  height: 8px;
+  background: repeating-linear-gradient(90deg,
+    var(--achiote) 0 30px, var(--maiz) 30px 60px, var(--masa) 60px 90px, var(--bijao-medio) 90px 120px);
+}
 
-.nav-derecha { display: flex; align-items: center; gap: 16px; }
-.enlace { color: var(--crema-masa); font-weight: 600; font-size: 0.9rem; background: none; border: none; }
-.enlace:hover { color: var(--oro-maiz); }
+.cabecera-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; padding-block: 12px; }
+
+.marca { display: flex; flex-direction: column; color: var(--masa); line-height: 1.1; }
+.marca-nombre { font-family: var(--fuente-titulo); font-size: 1.45rem; font-weight: 800; }
+.marca-lugar { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--maiz); margin-top: 2px; }
+
+.nav-derecha { display: flex; align-items: center; gap: 18px; }
+.enlace { color: var(--masa); font-weight: 600; font-size: 0.9rem; background: none; border: none; transition: color 0.15s ease; }
+.enlace:hover { color: var(--maiz); }
 .enlace-boton { padding: 0; }
-.saludo { color: var(--oro-maiz); font-size: 0.85rem; }
+.saludo { color: var(--maiz); font-size: 0.85rem; }
 
 .enlace-carrito {
-  position: relative; color: var(--crema-masa); font-weight: 600;
-  padding: 8px 14px; border-radius: var(--radio-chico); border: 1.5px solid var(--verde-hoja-suave);
+  position: relative; display: inline-flex; align-items: center; gap: 8px;
+  color: var(--bijao); background: var(--maiz); font-weight: 700; font-size: 0.9rem;
+  padding: 8px 16px; border-radius: var(--radio-chico);
+  transition: background 0.15s ease;
 }
-.enlace-carrito:hover { border-color: var(--oro-maiz); }
+.enlace-carrito:hover { background: #ffd166; }
+.enlace-carrito.latiendo { animation: latido 0.55s ease; }
 
 .contador {
-  position: absolute; top: -8px; right: -8px; background: var(--achiote); color: #fff;
-  font-size: 0.7rem; font-weight: 700; border-radius: 999px; min-width: 18px; height: 18px;
-  display: flex; align-items: center; justify-content: center; padding-inline: 4px;
+  position: absolute; top: -9px; right: -9px; background: var(--achiote); color: #fff;
+  font-size: 0.72rem; font-weight: 700; border-radius: 999px; min-width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center; padding-inline: 5px;
+  border: 2px solid var(--bijao);
+}
+
+@keyframes latido {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.14) rotate(-3deg); }
+  60% { transform: scale(0.96) rotate(2deg); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 640px) {
+  .saludo, .texto-carrito { display: none; }
+  .nav-derecha { gap: 12px; }
 }

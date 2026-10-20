@@ -20,11 +20,14 @@ export class CarritoService {
     this._items().reduce((acc, i) => acc + i.producto.precio * i.cantidad, 0),
   );
 
-  agregar(producto: Producto, cantidad = 1): void {
+  // Devuelve 'maximo' si el carrito ya tiene todas las unidades disponibles,
+  // para que la UI pueda avisarlo en vez de fingir que se agregó algo.
+  agregar(producto: Producto, cantidad = 1): 'agregado' | 'maximo' {
     const items = this._items();
     const existente = items.find((i) => i.producto.idProducto === producto.idProducto);
 
     if (existente) {
+      if (existente.cantidad >= producto.stock) return 'maximo';
       const nuevaCantidad = Math.min(existente.cantidad + cantidad, producto.stock);
       this.guardar(
         items.map((i) =>
@@ -34,6 +37,11 @@ export class CarritoService {
     } else {
       this.guardar([...items, { producto, cantidad: Math.min(cantidad, producto.stock) }]);
     }
+    return 'agregado';
+  }
+
+  cantidadDe(idProducto: number): number {
+    return this._items().find((i) => i.producto.idProducto === idProducto)?.cantidad ?? 0;
   }
 
   actualizarCantidad(idProducto: number, cantidad: number): void {

@@ -1,24 +1,27 @@
-<article class="tarjeta producto-card">
-  <div class="producto-encabezado">
+<article class="tarjeta producto-card" [class.tipo-lechona]="producto().tipoProducto === 'Lechona'" [class.agotado]="producto().stock <= 0">
+  <div class="producto-banner">
+    <span class="producto-emoji" aria-hidden="true">{{ producto().tipoProducto === 'Lechona' ? '🐖' : '🫔' }}</span>
     <span class="producto-tipo">{{ producto().tipoProducto }}</span>
     @if (producto().stock <= 3 && producto().stock > 0) {
-      <span class="producto-stock-bajo">Quedan {{ producto().stock }}</span>
+      <span class="producto-stock-bajo">¡Quedan {{ producto().stock }}!</span>
     }
   </div>
 
-  <h3>{{ producto().nombre }}</h3>
-  <p class="producto-detalle">{{ producto().detalleEspecifico }}</p>
-  <p class="producto-descripcion">{{ producto().descripcion }}</p>
+  <div class="producto-cuerpo">
+    <h3>{{ producto().nombre }}</h3>
+    <p class="producto-detalle">{{ producto().detalleEspecifico }}</p>
+    <p class="producto-descripcion">{{ producto().descripcion }}</p>
 
-  <div class="producto-pie">
-    <span class="producto-precio">{{ formatearPrecio(producto().precio) }}</span>
+    <div class="producto-pie">
+      <span class="producto-precio">{{ formatearPrecio(producto().precio) }}</span>
 
-    @if (producto().stock > 0) {
-      <button type="button" class="boton boton-primario" (click)="agregar.emit(producto())">
-        Agregar
-      </button>
-    } @else {
-      <span class="producto-agotado">Agotado</span>
-    }
+      @if (producto().stock > 0) {
+        <button type="button" class="boton boton-primario" (click)="agregar.emit(producto())">
+          <span aria-hidden="true">+</span> Agregar
+        </button>
+      } @else {
+        <span class="producto-agotado">Agotado</span>
+      }
+    </div>
   </div>
 </article>

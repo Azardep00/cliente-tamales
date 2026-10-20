@@ -1,54 +1,41 @@
-<section class="contenedor catalogo">
-  <h1>Catálogo</h1>
+<section class="hero">
+  <div class="contenedor hero-inner">
+    <p class="hero-etiqueta">Del Tolima a tu mesa</p>
+    <h1>Tamales y lechona<br />como se hacen en casa</h1>
+    <p class="hero-texto">Escoge lo que se te antoje, arma tu pedido y págalo en línea.</p>
+  </div>
+</section>
 
+<section class="contenedor catalogo">
   <div class="barra-busqueda">
+    <svg class="icono-busqueda" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>
+    </svg>
     <input
       type="text"
       class="input-busqueda"
       placeholder="Buscar por nombre..."
+      aria-label="Buscar por nombre"
       [ngModel]="busqueda()"
       (ngModelChange)="onBusquedaChange($event)"
     />
   </div>
 
   <div class="filtros">
-    <button type="button" class="boton" [class.boton-primario]="filtro() === 'TODOS'"
-            [class.boton-secundario]="filtro() !== 'TODOS'" (click)="cambiarFiltro('TODOS')">
-      Todos
-    </button>
-    <button type="button" class="boton" [class.boton-primario]="filtro() === 'Tamal'"
-            [class.boton-secundario]="filtro() !== 'Tamal'" (click)="cambiarFiltro('Tamal')">
-      Tamales
-    </button>
-    <button type="button" class="boton" [class.boton-primario]="filtro() === 'Lechona'"
-            [class.boton-secundario]="filtro() !== 'Lechona'" (click)="cambiarFiltro('Lechona')">
-      Lechona
-    </button>
+    <button type="button" class="chip" [class.activo]="filtro() === 'TODOS'" (click)="cambiarFiltro('TODOS')">Todos</button>
+    <button type="button" class="chip" [class.activo]="filtro() === 'Tamal'" (click)="cambiarFiltro('Tamal')">🫔 Tamales</button>
+    <button type="button" class="chip" [class.activo]="filtro() === 'Lechona'" (click)="cambiarFiltro('Lechona')">🐖 Lechona</button>
 
     <div class="filtro-precio">
-      <input
-        type="number"
-        class="input-precio"
-        placeholder="Precio mín"
-        min="0"
-        [ngModel]="precioMin()"
-        (ngModelChange)="onPrecioMinChange($event)"
-      />
+      <input type="number" class="input-precio" placeholder="Precio mín" aria-label="Precio mínimo" min="0"
+             [ngModel]="precioMin()" (ngModelChange)="onPrecioMinChange($event)" />
       <span class="filtro-precio__separador">—</span>
-      <input
-        type="number"
-        class="input-precio"
-        placeholder="Precio máx"
-        min="0"
-        [ngModel]="precioMax()"
-        (ngModelChange)="onPrecioMaxChange($event)"
-      />
+      <input type="number" class="input-precio" placeholder="Precio máx" aria-label="Precio máximo" min="0"
+             [ngModel]="precioMax()" (ngModelChange)="onPrecioMaxChange($event)" />
     </div>
 
     @if (hayFiltrosActivos()) {
-      <button type="button" class="boton boton-secundario" (click)="limpiarFiltros()">
-        Limpiar filtros
-      </button>
+      <button type="button" class="chip chip-limpiar" (click)="limpiarFiltros()">Limpiar filtros</button>
     }
   </div>
 
@@ -67,9 +54,7 @@
     <div class="estado-vacio">
       <h3>No hay productos que coincidan con tu búsqueda</h3>
       @if (hayFiltrosActivos()) {
-        <button type="button" class="boton boton-secundario" (click)="limpiarFiltros()">
-          Limpiar filtros
-        </button>
+        <button type="button" class="boton boton-secundario" (click)="limpiarFiltros()">Limpiar filtros</button>
       }
     </div>
   } @else {

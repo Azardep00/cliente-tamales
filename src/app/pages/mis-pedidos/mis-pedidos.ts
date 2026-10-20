@@ -2,7 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth.service';
 import { PedidoService } from '../../core/services/pedido.service';
-import { EstadoPagoWompi, Pedido } from '../../core/models/pedido.model';
+import { EstadoPagoWompi, EstadoPedido, Pedido } from '../../core/models/pedido.model';
 import { VolverCatalogo } from '../../shared/volver-catalogo/volver-catalogo';
 
 @Component({
@@ -39,6 +39,16 @@ export class MisPedidos {
       hour: 'numeric',
       minute: '2-digit',
     }).format(new Date(iso));
+  }
+
+  protected formatearEstado(estado: EstadoPedido): string {
+    return {
+      PENDIENTE: 'Pendiente de pago',
+      CONFIRMADO: 'Confirmado',
+      EN_PREPARACION: 'En preparación',
+      ENTREGADO: 'Entregado',
+      CANCELADO: 'Cancelado',
+    }[estado];
   }
 
   protected formatearEstadoPago(estado: EstadoPagoWompi): string {

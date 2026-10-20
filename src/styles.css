@@ -1,26 +1,41 @@
-/* Distribuidora de Tamales y Lechona — sistema de diseño.
-   Paleta basada en los materiales reales del producto: hoja de bijao
-   (verde), masa de maíz (crema), achiote (rojo tostado). */
+/* Distribuidora de Tamales y Lechona — sistema de diseño v2.
+   Paleta inspirada en la mesa tolimense: hoja de bijao (verde profundo),
+   masa de maíz (crema cálida), achiote (terracota), maíz amarillo (dorado)
+   y ají (rojo para alertas). Pensada para sentirse festiva y casera. */
 
 :root {
-  --verde-hoja: #16301f;
-  --verde-hoja-suave: #234a30;
-  --crema-masa: #fbf1de;
-  --crema-borde: #e2d2a8;
-  --achiote: #b8410f;
-  --achiote-oscuro: #8f3009;
-  --oro-maiz: #d6a23c;
-  --tinta: #241811;
-  --tinta-suave: #5a4a3c;
-  --peligro: #a3341f;
-  --exito: #2f6b3f;
+  --bijao: #1b4332;
+  --bijao-medio: #2d6a4f;
+  --bijao-claro: #dcebd8;
+  --masa: #fff6e3;
+  --masa-honda: #f7e6bd;
+  --borde: #ead9b0;
+  --achiote: #c2410c;
+  --achiote-oscuro: #9a3412;
+  --achiote-claro: #fde3d0;
+  --maiz: #f4b942;
+  --maiz-oscuro: #8a5a00;
+  --aji: #b3261e;
+  --exito: #2d6a4f;
+  --tinta: #2a1a12;
+  --tinta-suave: #6b5646;
 
-  --fuente-titulo: "Georgia", "Times New Roman", serif;
-  --fuente-cuerpo: -apple-system, "Segoe UI", sans-serif;
+  /* Alias de la versión anterior, para no romper estilos que no se tocaron. */
+  --verde-hoja: var(--bijao);
+  --verde-hoja-suave: var(--bijao-medio);
+  --crema-masa: var(--masa);
+  --crema-borde: var(--borde);
+  --oro-maiz: var(--maiz);
+  --peligro: var(--aji);
+
+  --fuente-titulo: "Fraunces", "Georgia", "Times New Roman", serif;
+  --fuente-cuerpo: "DM Sans", -apple-system, "Segoe UI", sans-serif;
 
   --ancho-contenido: 1180px;
-  --radio-tarjeta: 4px 22px 4px 22px;
-  --radio-chico: 4px 12px 4px 12px;
+  --radio-tarjeta: 6px 24px 6px 24px;
+  --radio-chico: 8px 16px 8px 16px;
+  --sombra-suave: 0 1px 2px rgba(42, 26, 18, 0.06), 0 6px 18px rgba(42, 26, 18, 0.06);
+  --sombra-alta: 0 2px 4px rgba(42, 26, 18, 0.08), 0 14px 30px rgba(42, 26, 18, 0.14);
 }
 
 * { box-sizing: border-box; }
@@ -29,46 +44,75 @@ body {
   margin: 0;
   font-family: var(--fuente-cuerpo);
   color: var(--tinta);
-  background: var(--crema-masa);
-  line-height: 1.5;
+  background-color: var(--masa);
+  /* Textura sutil de masa de maíz */
+  background-image: radial-gradient(circle at 1px 1px, rgba(194, 65, 12, 0.07) 1px, transparent 0);
+  background-size: 22px 22px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3 { font-family: var(--fuente-titulo); margin: 0; color: var(--tinta); line-height: 1.15; }
+h1, h2, h3 {
+  font-family: var(--fuente-titulo);
+  font-weight: 800;
+  margin: 0;
+  color: var(--tinta);
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
 p { margin: 0; }
 a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 
+:focus-visible { outline: 3px solid var(--maiz); outline-offset: 2px; }
+
 .contenedor { width: 100%; max-width: var(--ancho-contenido); margin-inline: auto; padding-inline: 24px; }
 
+/* ---------- Botones ---------- */
 .boton {
   display: inline-flex; align-items: center; justify-content: center; gap: 8px;
   padding: 12px 22px; border-radius: var(--radio-chico); border: 2px solid transparent;
-  font-weight: 600; font-size: 0.95rem; transition: background 0.15s ease;
+  font-weight: 700; font-size: 0.95rem;
+  transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease, color 0.15s ease;
 }
-.boton-primario { background: var(--achiote); color: var(--crema-masa); }
-.boton-primario:hover { background: var(--achiote-oscuro); }
-.boton-primario:disabled { background: var(--crema-borde); color: var(--tinta-suave); cursor: not-allowed; }
-.boton-secundario { background: transparent; border-color: var(--verde-hoja); color: var(--verde-hoja); }
-.boton-secundario:hover { background: var(--verde-hoja); color: var(--crema-masa); }
-
-.tarjeta { background: #fff; border: 1px solid var(--crema-borde); border-radius: var(--radio-tarjeta); }
-
-.estado-vacio { text-align: center; padding: 60px 24px; color: var(--tinta-suave); }
-.estado-vacio .boton { margin-top: 16px; }
-
-.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
-.campo label { font-size: 0.85rem; font-weight: 600; color: var(--tinta-suave); }
-.campo input {
-  padding: 10px 13px; border: 1.5px solid var(--crema-borde); border-radius: 10px;
-  background: #fff; color: var(--tinta);
-  width: 100%;
-  min-width: 0;
-}
-.campo input:focus { border-color: var(--achiote); outline: none; }
-.campo input.con-error { border-color: var(--peligro); }
-.mensaje-error { color: var(--peligro); font-size: 0.85rem; }
+.boton:active:not(:disabled) { transform: scale(0.96); }
+.boton-primario { background: var(--achiote); color: #fff; box-shadow: 0 3px 0 var(--achiote-oscuro); }
+.boton-primario:hover:not(:disabled) { background: var(--achiote-oscuro); }
+.boton-primario:active:not(:disabled) { box-shadow: 0 1px 0 var(--achiote-oscuro); transform: translateY(2px); }
+.boton-primario:disabled { background: var(--borde); color: var(--tinta-suave); box-shadow: none; cursor: not-allowed; }
+.boton-secundario { background: transparent; border-color: var(--bijao); color: var(--bijao); }
+.boton-secundario:hover { background: var(--bijao); color: var(--masa); }
 .boton-ancho { width: 100%; }
 
-.insignia { display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+/* ---------- Tarjetas ---------- */
+.tarjeta {
+  background: #fffdf8; border: 1px solid var(--borde); border-radius: var(--radio-tarjeta);
+  box-shadow: var(--sombra-suave);
+}
+
+.estado-vacio { text-align: center; padding: 60px 24px; color: var(--tinta-suave); }
+.estado-vacio h3 { color: var(--tinta); margin-bottom: 8px; }
+.estado-vacio .boton { margin-top: 16px; }
+
+/* ---------- Formularios ---------- */
+.campo { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+.campo label { font-size: 0.85rem; font-weight: 700; color: var(--tinta-suave); }
+.campo input {
+  padding: 11px 14px; border: 1.5px solid var(--borde); border-radius: 10px;
+  background: #fff; color: var(--tinta); font: inherit;
+  width: 100%; min-width: 0;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.campo input:focus { border-color: var(--achiote); outline: none; box-shadow: 0 0 0 4px var(--achiote-claro); }
+.campo input.con-error { border-color: var(--aji); }
+.mensaje-error { color: var(--aji); font-size: 0.85rem; }
 .campo-contrasena { position: relative; }
 .campo-contrasena input { padding-right: 40px; }
+
+/* ---------- Insignias ---------- */
+.insignia { display: inline-flex; padding: 4px 12px; border-radius: 999px; font-size: 0.78rem; font-weight: 700; }
+
+/* ---------- Movimiento reducido ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

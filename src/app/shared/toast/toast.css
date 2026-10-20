@@ -1,0 +1,49 @@
+.toasts {
+  position: fixed; z-index: 1000;
+  right: 20px; bottom: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  width: min(380px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 14px; border-radius: 6px 18px 6px 18px;
+  background: var(--bijao); color: var(--masa);
+  box-shadow: var(--sombra-alta);
+  border-left: 5px solid var(--maiz);
+  font-size: 0.92rem; font-weight: 500;
+  animation: toast-entra 0.28s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+}
+.toast-aviso { background: var(--maiz-oscuro); border-left-color: var(--maiz); }
+.toast-error { background: var(--aji); border-left-color: #ffd7d2; }
+
+.toast-icono {
+  flex: none; width: 24px; height: 24px; border-radius: 50%;
+  display: grid; place-items: center;
+  background: var(--maiz); color: var(--bijao); font-weight: 800; font-size: 0.85rem;
+}
+.toast-mensaje { flex: 1; }
+
+.toast-accion {
+  flex: none; color: var(--maiz); font-weight: 700; font-size: 0.85rem;
+  text-decoration: underline; text-underline-offset: 3px;
+}
+.toast-accion:hover { color: #fff; }
+
+.toast-cerrar {
+  flex: none; background: none; border: none; color: inherit; opacity: 0.6;
+  font-size: 1.3rem; line-height: 1; padding: 0 2px;
+}
+.toast-cerrar:hover { opacity: 1; }
+
+@keyframes toast-entra {
+  from { opacity: 0; transform: translateY(16px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+
+/* En celular el aviso va arriba, para que no tape el botón que se acaba de tocar. */
+@media (max-width: 640px) {
+  .toasts { top: 12px; bottom: auto; right: 16px; left: 16px; width: auto; }
+}

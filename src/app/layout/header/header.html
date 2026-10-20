@@ -1,4 +1,5 @@
 <header class="cabecera">
+  <div class="banderines" aria-hidden="true"></div>
   <div class="contenedor cabecera-inner">
     <a routerLink="/" class="marca">
       <span class="marca-nombre">Tamales &amp; Lechona</span>
@@ -15,8 +16,12 @@
         <a routerLink="/login" class="enlace">Ingresar</a>
       }
 
-      <a routerLink="/carrito" class="enlace-carrito">
-        Carrito
+      <a routerLink="/carrito" class="enlace-carrito" [class.latiendo]="latiendo()" aria-label="Ir al carrito">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/>
+          <path d="M2 3h3l2.6 12.2a1 1 0 0 0 1 .8h8.9a1 1 0 0 0 1-.8L20 7H6"/>
+        </svg>
+        <span class="texto-carrito">Carrito</span>
         @if (carrito.cantidadTotal() > 0) {
           <span class="contador">{{ carrito.cantidadTotal() }}</span>
         }

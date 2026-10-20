@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ProductoService } from '../../core/services/producto.service';
 import { CarritoService } from '../../core/services/carrito.service';
+import { ToastService } from '../../core/services/toast.service';
 import { Producto } from '../../core/models/producto.model';
 import { ProductoCard } from '../../shared/producto-card/producto-card';
 import { ProductoCardSkeleton } from '../../shared/producto-card-skeleton/producto-card-skeleton';
@@ -17,6 +18,7 @@ type Filtro = 'TODOS' | 'Tamal' | 'Lechona';
 export class Catalogo {
   private readonly productoService = inject(ProductoService);
   private readonly carrito = inject(CarritoService);
+  private readonly toast = inject(ToastService);
 
   protected readonly productos = signal<Producto[]>([]);
   protected readonly cargando = signal(true);
@@ -91,7 +93,21 @@ export class Catalogo {
   }
 
   protected agregarAlCarrito(producto: Producto): void {
-    this.carrito.agregar(producto);
+    const resultado = this.carrito.agregar(producto);
+    if (resultado === 'maximo') {
+      this.toast.mostrar(`Ya tienes en el carrito todas las unidades disponibles de ${producto.nombre}.`, {
+        tipo: 'aviso',
+        accion: { texto: 'Ver carrito', ruta: '/carrito' },
+      });
+      return;
+    }
+    const enCarrito = this.carrito.cantidadDe(producto.idProducto);
+    this.toast.mostrar(
+      enCarrito > 1
+        ? `${producto.nombre} agregado · ya llevas ${enCarrito}`
+        : `${producto.nombre} agregado al carrito`,
+      { accion: { texto: 'Ver carrito', ruta: '/carrito' } },
+    );
   }
 
   private cargar(): void {

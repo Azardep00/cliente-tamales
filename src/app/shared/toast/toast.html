@@ -1,0 +1,18 @@
+<div class="toasts" role="status" aria-live="polite">
+  @for (t of toastService.toasts(); track t.id) {
+    <div class="toast toast-{{ t.tipo }}">
+      <span class="toast-icono" aria-hidden="true">
+        @switch (t.tipo) {
+          @case ('exito') { ✓ }
+          @case ('aviso') { ! }
+          @default { × }
+        }
+      </span>
+      <span class="toast-mensaje">{{ t.mensaje }}</span>
+      @if (t.accion) {
+        <a class="toast-accion" [routerLink]="t.accion.ruta" (click)="toastService.cerrar(t.id)">{{ t.accion.texto }}</a>
+      }
+      <button type="button" class="toast-cerrar" aria-label="Cerrar aviso" (click)="toastService.cerrar(t.id)">×</button>
+    </div>
+  }
+</div>
