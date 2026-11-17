@@ -25,7 +25,7 @@ export class Catalogo {
   protected readonly error = signal<string | null>(null);
   protected readonly filtro = signal<Filtro>('TODOS');
 
-  // Nuevo: texto de busqueda y rango de precio, ambos opcionales.
+  // Texto de busqueda y rango de precio, ambos opcionales.
   protected readonly busqueda = signal('');
   protected readonly precioMin = signal<number | null>(null);
   protected readonly precioMax = signal<number | null>(null);
@@ -48,7 +48,7 @@ export class Catalogo {
     }
 
     const min = this.precioMin();
-    if (min !== null && Number.isFinite(min) && min >= 0) {
+    if (min !== null && Number.isFinite(min) && min > 0) {
       lista = lista.filter((p) => p.precio >= min);
     }
 
@@ -70,22 +70,12 @@ export class Catalogo {
 
   protected onPrecioMinChange(valor: string | number | null): void {
     const numero = valor === '' || valor === null ? null : Number(valor);
-
-    this.precioMin.set(
-      numero !== null && Number.isFinite(numero) && numero >= 0
-        ? numero
-        : null
-    );
+    this.precioMin.set(numero !== null && Number.isFinite(numero) && numero >= 0 ? numero : null);
   }
 
   protected onPrecioMaxChange(valor: string | number | null): void {
     const numero = valor === '' || valor === null ? null : Number(valor);
-
-    this.precioMax.set(
-      numero !== null && Number.isFinite(numero) && numero >= 0
-        ? numero
-        : null
-    );
+    this.precioMax.set(numero !== null && Number.isFinite(numero) && numero >= 0 ? numero : null);
   }
 
   protected limpiarFiltros(): void {
@@ -96,11 +86,10 @@ export class Catalogo {
   }
 
   protected hayFiltrosActivos(): boolean {
-    const min = this.precioMin();
     return (
       this.filtro() !== 'TODOS' ||
       this.busqueda().trim() !== '' ||
-      (min !== null) ||
+      this.precioMin() !== null ||
       this.precioMax() !== null
     );
   }
