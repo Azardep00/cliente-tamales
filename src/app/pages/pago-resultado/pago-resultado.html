@@ -11,7 +11,7 @@
       }
       <a routerLink="/mis-pedidos" class="boton boton-secundario">Ver mis pedidos</a>
     } @else if (estado()?.estadoPago === 'APPROVED') {
-      <p>¡Pago aprobado! Tu pedido #{{ estado()?.idPedido }} quedó confirmado.</p>
+      <p>¡Pago aprobado! Tu pedido #{{ idCorto(estado()?.idPedido) }} quedó confirmado.</p>
       <a routerLink="/mis-pedidos" class="boton boton-primario">Ver mis pedidos</a>
     } @else if (estado()?.estadoPago === 'PENDING') {
       <p>Wompi todavía está procesando el pago. El pedido se confirmará cuando recibamos la aprobación.</p>

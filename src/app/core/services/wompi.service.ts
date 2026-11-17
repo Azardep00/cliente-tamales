@@ -17,12 +17,12 @@ export class WompiService {
     return this.http.post<WompiCheckout>(`${API_BASE_URL}/pagos/wompi/checkout`, { detalles });
   }
 
-  reintentarPago(idPedido: number): Observable<WompiCheckout> {
+  reintentarPago(idPedido: string): Observable<WompiCheckout> {
     if (!environment.wompiPublicKey.startsWith('pub_')) {
       return throwError(() => new Error('Configura la llave pública de Wompi antes de iniciar el pago.'));
     }
     return this.http.post<WompiCheckout>(
-      `${API_BASE_URL}/pagos/wompi/pedidos/${idPedido}/intentos`,
+      `${API_BASE_URL}/pagos/wompi/pedidos/${encodeURIComponent(idPedido)}/intentos`,
       {},
     );
   }
@@ -39,7 +39,7 @@ export class WompiService {
 
     const retorno = new URL('/pago/resultado', window.location.origin);
     retorno.searchParams.set('referencia', checkout.referencia);
-    retorno.searchParams.set('pedido', checkout.idPedido.toString());
+    retorno.searchParams.set('pedido', checkout.idPedido);
 
     const campos: Record<string, string> = {
       'public-key': environment.wompiPublicKey,

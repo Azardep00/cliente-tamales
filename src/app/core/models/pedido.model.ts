@@ -1,18 +1,18 @@
-import { Producto } from './producto.model';
-
 export type EstadoPedido = 'PENDIENTE' | 'CONFIRMADO' | 'EN_PREPARACION' | 'ENTREGADO' | 'CANCELADO';
 export type EstadoPagoWompi = 'PENDING' | 'APPROVED' | 'DECLINED' | 'VOIDED' | 'ERROR';
 
 export interface DetallePedido {
-  idDetallePedido: number;
-  producto: Producto;
+  idProducto: string;
+  nombreProducto: string;
   cantidad: number;
   precioUnitario: number;
   subtotal: number;
 }
 
 export interface Pedido {
-  idPedido: number;
+  idPedido: string;
+  idCliente: string;
+  correoCliente: string;
   estado: EstadoPedido;
   fecha: string;
   detalles: DetallePedido[];
@@ -21,11 +21,11 @@ export interface Pedido {
 }
 
 export interface DetallePedidoRequest {
-  idProducto: number;
+  idProducto: string;
   cantidad: number;
 }
 
 export interface PedidoRequest {
-  idCliente: number;
+  idCliente?: string; // solo lo usan empleados; con token de cliente el backend lo ignora
   detalles: DetallePedidoRequest[];
 }

@@ -12,14 +12,14 @@ export class PedidoService {
     return this.http.post<Pedido>(`${API_BASE_URL}/pedidos`, datos);
   }
 
-  listarPorCliente(idCliente: number): Observable<Pedido[]> {
+  listarPorCliente(idCliente: string): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(`${API_BASE_URL}/pedidos`, {
-      params: { idCliente: idCliente.toString() },
+      params: { idCliente },
     });
   }
 
   // El backend cancela (no borra) y devuelve el stock automáticamente.
-  cancelar(id: number): Observable<void> {
+  cancelar(id: string): Observable<void> {
     return this.http.delete<void>(`${API_BASE_URL}/pedidos/${id}`);
   }
 }

@@ -1,5 +1,5 @@
 export interface WompiCheckout {
-  idPedido: number;
+  idPedido: string;
   referencia: string;
   montoEnCentavos: number;
   moneda: string;
@@ -7,7 +7,7 @@ export interface WompiCheckout {
 }
 
 export interface WompiPaymentStatus {
-  idPedido: number;
+  idPedido: string;
   referencia: string;
   estadoPago: 'PENDING' | 'APPROVED' | 'DECLINED' | 'VOIDED' | 'ERROR';
   estadoPedido: string;

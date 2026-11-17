@@ -17,7 +17,7 @@
         <div class="tarjeta pedido">
           <div class="pedido-encabezado">
             <div>
-              <strong>Pedido #{{ pedido.idPedido }}</strong>
+              <strong>Pedido #{{ idCorto(pedido.idPedido) }}</strong>
               <p class="pedido-fecha">{{ formatearFecha(pedido.fecha) }}</p>
             </div>
             <span class="insignia insignia-{{ pedido.estado.toLowerCase() }}">{{ formatearEstado(pedido.estado) }}</span>
@@ -27,9 +27,9 @@
           }
 
           <div class="pedido-detalles">
-            @for (d of pedido.detalles; track d.idDetallePedido) {
+            @for (d of pedido.detalles; track d.idProducto) {
               <div class="linea">
-                <span>{{ d.cantidad }} × {{ d.producto.nombre }}</span>
+                <span>{{ d.cantidad }} × {{ d.nombreProducto }}</span>
                 <span>{{ formatearPrecio(d.subtotal) }}</span>
               </div>
             }

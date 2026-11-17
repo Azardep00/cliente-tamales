@@ -18,10 +18,15 @@ export class MisPedidos {
   protected readonly pedidos = signal<Pedido[]>([]);
   protected readonly cargando = signal(true);
   protected readonly error = signal<string | null>(null);
-  protected readonly cancelandoId = signal<number | null>(null);
+  protected readonly cancelandoId = signal<string | null>(null);
 
   constructor() {
     this.cargar();
+  }
+
+  // Los IDs de Mongo miden 24 caracteres: en pantalla se muestran los últimos 6.
+  protected idCorto(id: string): string {
+    return id.slice(-6).toUpperCase();
   }
 
   protected formatearPrecio(valor: number): string {
@@ -68,7 +73,7 @@ export class MisPedidos {
     return pedidoCancelable && !pagoBloqueaCancelacion;
   }
 
-  protected cancelar(idPedido: number): void {
+  protected cancelar(idPedido: string): void {
     this.cancelandoId.set(idPedido);
     this.pedidoService.cancelar(idPedido).subscribe({
       next: () => this.cargar(),
@@ -87,7 +92,7 @@ export class MisPedidos {
     this.pedidoService.listarPorCliente(sesion.idUsuario).subscribe({
       next: (data) => {
         // Más recientes primero.
-        this.pedidos.set([...data].sort((a, b) => b.idPedido - a.idPedido));
+        this.pedidos.set([...data].sort((a, b) => new Date(b.fecha).getTime() - new Date(a.fecha).getTime()));
         this.cargando.set(false);
         this.cancelandoId.set(null);
       },

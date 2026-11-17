@@ -8,15 +8,15 @@ import { ActualizarClienteRequest, CambiarContrasenaRequest, Usuario } from '../
 export class UsuarioService {
   private readonly http = inject(HttpClient);
 
-  obtener(id: number): Observable<Usuario> {
+  obtener(id: string): Observable<Usuario> {
     return this.http.get<Usuario>(`${API_BASE_URL}/usuarios/${id}`);
   }
 
-  actualizarCliente(id: number, datos: ActualizarClienteRequest): Observable<Usuario> {
+  actualizarCliente(id: string, datos: ActualizarClienteRequest): Observable<Usuario> {
     return this.http.put<Usuario>(`${API_BASE_URL}/usuarios/${id}`, datos);
   }
 
-  cambiarContrasena(id: number, datos: CambiarContrasenaRequest): Observable<void> {
+  cambiarContrasena(id: string, datos: CambiarContrasenaRequest): Observable<void> {
     return this.http.patch<void>(`${API_BASE_URL}/usuarios/${id}/contrasena`, datos);
   }
 }

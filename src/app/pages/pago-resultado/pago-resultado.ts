@@ -22,16 +22,20 @@ export class PagoResultado {
 
   private readonly idTransaccion = this.route.snapshot.queryParamMap.get('id');
   private readonly referencia = this.route.snapshot.queryParamMap.get('referencia');
-  private readonly idPedido = Number(this.route.snapshot.queryParamMap.get('pedido'));
+  private readonly idPedido = this.route.snapshot.queryParamMap.get('pedido');
 
   protected readonly tieneDatosTransaccion = Boolean(this.idTransaccion && this.referencia);
 
   constructor() {
-    if (!this.idTransaccion || !this.referencia || !Number.isInteger(this.idPedido) || this.idPedido <= 0) {
+    if (!this.idTransaccion || !this.referencia || !this.idPedido) {
       this.error.set('No encontramos los datos para verificar este pago.');
       return;
     }
     this.consultarEstado();
+  }
+
+  protected idCorto(id: string | undefined): string {
+    return id ? id.slice(-6).toUpperCase() : '';
   }
 
   protected consultarEstado(): void {
@@ -55,7 +59,7 @@ export class PagoResultado {
   protected reintentarPago(): void {
     this.preparandoReintento.set(true);
     this.error.set(null);
-    this.wompi.reintentarPago(this.idPedido).subscribe({
+    this.wompi.reintentarPago(this.idPedido!).subscribe({
       next: (checkout: WompiCheckout) => {
         try {
           this.wompi.redirigirAlCheckout(checkout);

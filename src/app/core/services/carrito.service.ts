@@ -40,11 +40,11 @@ export class CarritoService {
     return 'agregado';
   }
 
-  cantidadDe(idProducto: number): number {
+  cantidadDe(idProducto: string): number {
     return this._items().find((i) => i.producto.idProducto === idProducto)?.cantidad ?? 0;
   }
 
-  actualizarCantidad(idProducto: number, cantidad: number): void {
+  actualizarCantidad(idProducto: string, cantidad: number): void {
     if (cantidad <= 0) {
       this.quitar(idProducto);
       return;
@@ -52,7 +52,7 @@ export class CarritoService {
     this.guardar(this._items().map((i) => (i.producto.idProducto === idProducto ? { ...i, cantidad } : i)));
   }
 
-  quitar(idProducto: number): void {
+  quitar(idProducto: string): void {
     this.guardar(this._items().filter((i) => i.producto.idProducto !== idProducto));
   }
 
@@ -69,7 +69,10 @@ export class CarritoService {
     const bruto = localStorage.getItem(CLAVE_CARRITO);
     if (!bruto) return [];
     try {
-      return JSON.parse(bruto) as ItemCarrito[];
+      // Descarta carritos viejos guardados con IDs numéricos (antes de Mongo):
+      // ya no existen en el backend y romperían el checkout.
+      const items = JSON.parse(bruto) as ItemCarrito[];
+      return items.filter((i) => typeof i.producto?.idProducto === 'string');
     } catch {
       return [];
     }

@@ -1,7 +1,7 @@
 export type TipoCliente = 'NUEVO' | 'FRECUENTE' | 'PREMIUM';
 
 export interface Usuario {
-  idUsuario: number;
+  idUsuario: string;
   nombre: string;
   apellido: string;
   telefono: string;
@@ -56,7 +56,7 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
-  idUsuario: number;
+  idUsuario: string;
   nombre: string;
   apellido: string;
   correo: string;
